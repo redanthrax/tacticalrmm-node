@@ -1,19 +1,19 @@
 {
-  "name": "n8n-nodes-<...>",
+  "name": "tacticalrmm-node",
   "version": "0.1.0",
-  "description": "",
+  "description": "An n8n node to connecto to TacticalRMM",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
   "homepage": "",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "redanthrax",
+    "email": "red@4c.gg"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/redanthrax/tacticalrmm-node.git"
   },
   "main": "index.js",
   "scripts": {
