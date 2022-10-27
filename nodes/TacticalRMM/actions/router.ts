@@ -24,7 +24,7 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
 
         try {
             if(tacticalrmm.resource === 'agents') {
-                responseData = await agents[tacticalrmm.operation].execute.call(this, i);
+                responseData = await agents[tacticalrmm.operation].execute.call(this);
             }
 
             const executionData = this.helpers.returnJsonArray(responseData);

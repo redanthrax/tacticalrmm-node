@@ -1,5 +1,5 @@
 import {
-    IDataObject,ILoadOptionsFunctions,
+    ILoadOptionsFunctions,
     INodePropertyOptions,
     NodeOperationError,
 } from 'n8n-workflow';

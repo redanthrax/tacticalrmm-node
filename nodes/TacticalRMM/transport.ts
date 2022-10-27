@@ -15,7 +15,7 @@ export async function apiRequest(
     body: IDataObject | GenericValue | GenericValue[] = {},
     qs: IDataObject = {},
 ) {
-    const creds = await this.getCredentials('tacticalrmmApi');
+    const creds = await this.getCredentials('TacticalRMMApi');
 
     const options: IHttpRequestOptions = {
         method,
@@ -28,5 +28,5 @@ export async function apiRequest(
         },
     };
 
-    return this.helpers.httpRequestWithAuthentication.call(this, 'tacticalrmmApi', options);
+    return this.helpers.httpRequestWithAuthentication.call(this, 'TacticalRMMApi', options);
 }

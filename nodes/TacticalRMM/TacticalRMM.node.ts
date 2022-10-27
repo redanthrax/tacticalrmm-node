@@ -8,6 +8,7 @@ import {
 
 import { description } from './actions/description'
 import { loadOptions } from './methods';
+import { router } from './actions/router';
 
 export class TacticalRMM implements INodeType {
     description: INodeTypeDescription;

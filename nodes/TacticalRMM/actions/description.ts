@@ -1,7 +1,7 @@
 import { INodeTypeDescription } from 'n8n-workflow';
+import * as agents from './agents';
 
 export const description: INodeTypeDescription = {
-
     displayName: 'Tactical RMM',
     name: 'TacticalRMM',
     icon: 'file:onit.png',
@@ -40,5 +40,6 @@ export const description: INodeTypeDescription = {
             ],
             default: 'agents',
         },
+        ...agents.descriptions,
     ],
 }
