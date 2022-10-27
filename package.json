@@ -1,7 +1,7 @@
 {
-  "name": "tacticalrmm-node",
+  "name": "n8n-nodes-tacticalrmm",
   "version": "0.1.0",
-  "description": "An n8n node to connecto to TacticalRMM",
+  "description": "An n8n node to connec to TacticalRMM",
   "keywords": [
     "n8n-community-node-package"
   ],
@@ -30,12 +30,10 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+        "dist/credentials/TacticalRMMApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+        "dist/nodes/TacticalRMM/TacticalRMM.node.js"
     ]
   },
   "devDependencies": {
@@ -49,5 +47,8 @@
     "prettier": "^2.7.1",
     "tslint": "^6.1.2",
     "typescript": "~4.6.0"
+  },
+  "dependencies": {
+    "n8n": "^0.199.0"
   }
 }
