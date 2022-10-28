@@ -1,6 +1,6 @@
-import { AgentsProperties } from '../../Interfaces';
+import { AgentProperties } from '../../Interfaces';
 
-export const agentsGetByIdDescription: AgentsProperties = [
+export const agentGetByIdDescription: AgentProperties = [
     {
         displayName: 'Agent ID',
         name: 'agentId',
@@ -8,7 +8,7 @@ export const agentsGetByIdDescription: AgentsProperties = [
         required: true,
         displayOptions: {
             show: {
-                resource: ['agents'],
+                resource: ['agent'],
                 operation: ['getById'],
             },
         },

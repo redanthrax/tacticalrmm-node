@@ -1,6 +1,6 @@
 import { INodeTypeDescription } from 'n8n-workflow';
-import * as agents from './agents';
-import * as clients from './clients';
+import * as agent from './agent';
+import * as client from './client';
 import * as alerts from './alerts';
 
 export const description: INodeTypeDescription = {
@@ -36,22 +36,22 @@ export const description: INodeTypeDescription = {
             noDataExpression: true,
             options: [
                 {
-                    name: 'Agents',
-                    value: 'agents',
+                    name: 'Agent',
+                    value: 'agent',
                 },
                 {
                     name: 'Alerts',
                     value: 'alerts',
                 },
                 {
-                    name: 'Clients',
-                    value: 'clients',
+                    name: 'Client',
+                    value: 'client',
                 },
             ],
-            default: 'agents',
+            default: 'agent',
         },
-        ...agents.descriptions,
+        ...agent.descriptions,
         ...alerts.descriptions,
-        ...clients.descriptions,
+        ...client.descriptions,
     ],
 }

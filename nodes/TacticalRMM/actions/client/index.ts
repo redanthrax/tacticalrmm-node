@@ -1,8 +1,9 @@
 import * as getAll from './getAll';
+import * as getById from './getById';
 
 import { INodeProperties } from 'n8n-workflow';
 
-export { getAll };
+export { getAll, getById };
 
 export const descriptions: INodeProperties[] = [
     {
@@ -12,7 +13,7 @@ export const descriptions: INodeProperties[] = [
         noDataExpression: true,
         displayOptions: {
             show: {
-                resource: ['clients'],
+                resource: ['client'],
             },
         },
         options: [
@@ -22,8 +23,15 @@ export const descriptions: INodeProperties[] = [
                 description: 'Retrieve all clients',
                 action: 'Get all clients',
             },
+            {
+                name: 'Get By ID',
+                value: 'getById',
+                description: 'Get a client by ID',
+                action: 'Get an client by ID',
+            },
         ],
         default: '',
     },
     ...getAll.description,
+    ...getById.description,
 ];
