@@ -9,9 +9,12 @@ export async function getAll(
     index: number,
 ): Promise<INodeExecutionData[]> {
     const qs = {} as IDataObject;
-    const requestMethod = 'GET';
-    const endpoint = '/agents';
-    const body = {} as IDataObject;
+    const requestMethod = 'PATCH';
+    const endpoint = '/alerts';
+    const body = {
+        snoozedFilter: false,
+        resolvedFilter: false,
+    } as IDataObject;
 
     let responseData;
     responseData = await apiRequest.call(this, requestMethod, endpoint, body, qs);

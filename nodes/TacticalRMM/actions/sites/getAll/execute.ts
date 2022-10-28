@@ -10,7 +10,7 @@ export async function getAll(
 ): Promise<INodeExecutionData[]> {
     const qs = {} as IDataObject;
     const requestMethod = 'GET';
-    const endpoint = '/agents';
+    const endpoint = '/sites';
     const body = {} as IDataObject;
 
     let responseData;

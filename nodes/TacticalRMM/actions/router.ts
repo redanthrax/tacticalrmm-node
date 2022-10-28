@@ -6,6 +6,9 @@ import {
 } from 'n8n-workflow';
 
 import * as agents from './agents';
+import * as alerts from './alerts';
+import * as clients from './clients';
+import * as sites from './sites';
 import { TacticalRMM } from './Interfaces';
 
 export async function router(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
@@ -23,8 +26,21 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
         } as TacticalRMM;
 
         try {
-            if(tacticalrmm.resource === 'agents') {
-                responseData = await agents[tacticalrmm.operation].execute.call(this);
+            switch(tacticalrmm.resource) {
+                case 'agents':
+                    responseData = await agents[tacticalrmm.operation].execute.call(this, i);
+                    break;
+                case 'alerts':
+                    responseData = await alerts[tacticalrmm.operation].execute.call(this, i);
+                    break;
+                case 'clients':
+                    responseData = await clients[tacticalrmm.operation].execute.call(this, i);
+                    break;
+                case 'sites':
+                    responseData = await sites[tacticalrmm.operation].execute.call(this, i);
+                    break;
+                default:
+                    break;
             }
 
             const executionData = this.helpers.returnJsonArray(responseData);

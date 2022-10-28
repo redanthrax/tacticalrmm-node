@@ -5,7 +5,6 @@ import {
     IDataObject,
     IHttpRequestMethods,
     IHttpRequestOptions,
-    NodeOperationError,
 } from 'n8n-workflow';
 
 export async function apiRequest(

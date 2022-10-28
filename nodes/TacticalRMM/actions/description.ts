@@ -1,5 +1,7 @@
 import { INodeTypeDescription } from 'n8n-workflow';
 import * as agents from './agents';
+import * as clients from './clients';
+import * as alerts from './alerts';
 
 export const description: INodeTypeDescription = {
     displayName: 'Tactical RMM',
@@ -37,9 +39,19 @@ export const description: INodeTypeDescription = {
                     name: 'Agents',
                     value: 'agents',
                 },
+                {
+                    name: 'Alerts',
+                    value: 'alerts',
+                },
+                {
+                    name: 'Clients',
+                    value: 'clients',
+                },
             ],
             default: 'agents',
         },
         ...agents.descriptions,
+        ...alerts.descriptions,
+        ...clients.descriptions,
     ],
 }
