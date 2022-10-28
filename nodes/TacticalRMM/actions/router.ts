@@ -6,9 +6,8 @@ import {
 } from 'n8n-workflow';
 
 import * as agent from './agent';
-import * as alerts from './alerts';
+import * as alert from './alert';
 import * as client from './client';
-import * as sites from './sites';
 import { TacticalRMM } from './Interfaces';
 
 export async function router(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
@@ -30,14 +29,11 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
                 case 'agent':
                     responseData = await agent[tacticalrmm.operation].execute.call(this, i);
                     break;
-                case 'alerts':
-                    responseData = await alerts[tacticalrmm.operation].execute.call(this, i);
+                case 'alert':
+                    responseData = await alert[tacticalrmm.operation].execute.call(this, i);
                     break;
                 case 'client':
                     responseData = await client[tacticalrmm.operation].execute.call(this, i);
-                    break;
-                case 'sites':
-                    responseData = await sites[tacticalrmm.operation].execute.call(this, i);
                     break;
                 default:
                     break;

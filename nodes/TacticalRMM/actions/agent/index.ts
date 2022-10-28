@@ -6,7 +6,7 @@ import { INodeProperties } from 'n8n-workflow';
 
 export { getAll, getById, getByClient };
 
-export const descriptions: INodeProperties[] = [
+export const description: INodeProperties[] = [
     {
         displayName: 'Operation',
         name: 'operation',
@@ -37,7 +37,7 @@ export const descriptions: INodeProperties[] = [
                 action: 'Get agents by Client',
             },
         ],
-        default: '',
+        default: 'getAll',
     },
     ...getAll.description,
     ...getById.description,

@@ -4,7 +4,7 @@ import { INodeProperties } from 'n8n-workflow';
 
 export { getAll };
 
-export const descriptions: INodeProperties[] = [
+export const description: INodeProperties[] = [
     {
         displayName: 'Operation',
         name: 'operation',
@@ -12,18 +12,18 @@ export const descriptions: INodeProperties[] = [
         noDataExpression: true,
         displayOptions: {
             show: {
-                resource: ['sites'],
+                resource: ['alert'],
             },
         },
         options: [
             {
-                name: 'Get All Sites',
+                name: 'Get All Alerts',
                 value: 'getAll',
-                description: 'Retrieve all Sites',
-                action: 'Get all sites',
+                description: 'Retrieve all alerts',
+                action: 'Get all alerts',
             },
         ],
-        default: '',
+        default: 'getAll',
     },
     ...getAll.description,
 ];
