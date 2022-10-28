@@ -20,13 +20,15 @@ in the n8n community nodes documentation.
 
 ## Operations
 
-###Get Agents
+### Get Agents
 - Get All
 - Get By ID
 - Get By Client
-###Get Alerts
+
+### Get Alerts
 - Get All
-###Get Clients
+
+### Get Clients
 - Get All
 - Get By ID
 
