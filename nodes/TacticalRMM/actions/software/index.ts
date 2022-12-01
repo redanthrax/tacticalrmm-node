@@ -25,5 +25,5 @@ export const description: INodeProperties[] = [
 				],
 				default: 'getByAgent',
 		},
-        ...getByAgent.description,
+				...getByAgent.description,
 ];
