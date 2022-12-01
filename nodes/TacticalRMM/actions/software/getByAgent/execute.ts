@@ -14,6 +14,6 @@ export async function getByAgent(
 		const agentId = this.getNodeParameter('agentId', index) as string;
 				const endpoint = `/software/${agentId}/`;
 		const responseData = await apiRequest.call(this, requestMethod, endpoint, body, qs);
-				console.log(responseData);
-		return this.helpers.returnJsonArray(responseData['software']);
+				responseData['agent_id'] = agentId;
+		return this.helpers.returnJsonArray(responseData);
 }
