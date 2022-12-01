@@ -8,6 +8,7 @@ import {
 import * as agent from './agent';
 import * as alert from './alert';
 import * as client from './client';
+import * as software from './software';
 import { TacticalRMM } from './Interfaces';
 
 export async function router(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
@@ -34,6 +35,9 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
 										break;
 								case 'client':
 										responseData = await client[tacticalrmm.operation].execute.call(this, i);
+										break;
+								case 'software':
+										responseData = await software[tacticalrmm.operation].execute.call(this, i);
 										break;
 								default:
 										break;

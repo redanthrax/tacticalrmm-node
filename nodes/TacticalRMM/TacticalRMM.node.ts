@@ -2,6 +2,7 @@ import { IExecuteFunctions } from 'n8n-core';
 import * as agent from './actions/agent';
 import * as client from './actions/client';
 import * as alert from './actions/alert';
+import * as software from './actions/software';
 
 import {
 		INodeType,
@@ -56,12 +57,17 @@ export class TacticalRMM implements INodeType {
 												name: 'Client',
 												value: 'client',
 										},
+										{
+												name: 'Software',
+												value: 'software',
+										},
 								],
 								default: 'agent',
 						},
 						...agent.description,
 						...alert.description,
 						...client.description,
+						...software.description,
 				],
 		};
 
