@@ -13,10 +13,10 @@ export async function getByAgent(
 				const qs = {} as IDataObject;
 		const agentId = this.getNodeParameter('agentId', index) as string;
 				const endpoint = `/software/${agentId}/`;
-		let responseData = await apiRequest.call(this, requestMethod, endpoint, body, qs);
-        if (responseData.software) {
-            responseData.software = responseData.software.sort((a: any, b: any) => a.name.localeCompare(b.name));
-        }
+		const responseData = await apiRequest.call(this, requestMethod, endpoint, body, qs);
+				if (responseData.software) {
+						responseData.software = responseData.software.sort((a, b) => a.name.localeCompare(b.name));
+				}
 		responseData['agent_id'] = agentId;
 		return this.helpers.returnJsonArray(responseData);
 }
