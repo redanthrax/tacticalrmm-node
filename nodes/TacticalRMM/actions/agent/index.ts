@@ -1,6 +1,7 @@
 import * as getAll from './getAll';
 import * as getById from './getById';
 import * as getByClient from './getByClient';
+import * as agentCommon from './agentCommon';
 
 import { INodeProperties } from 'n8n-workflow';
 
@@ -19,7 +20,7 @@ export const description: INodeProperties[] = [
 				},
 				options: [
 						{
-								name: 'Get Many',
+								name: 'Get All',
 								value: 'getAll',
 								description: 'Retrieve many agents',
 								action: 'Get many agents',
@@ -42,4 +43,5 @@ export const description: INodeProperties[] = [
 		...getAll.description,
 		...getById.description,
 		...getByClient.description,
+        ...agentCommon.agentCommon,
 ];

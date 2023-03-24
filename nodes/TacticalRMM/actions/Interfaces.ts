@@ -4,7 +4,7 @@ type TacticalRMMMap = {
 		agent: 'getAll' | 'getById' | 'getByClient';
 		alert: 'getAll';
 		client: 'getAll' | 'getById';
-				software: 'getByAgent';
+        software: 'getByAgent' | 'get';
 };
 
 export type TacticalRMM = AllEntities<TacticalRMMMap>;

@@ -1,8 +1,9 @@
 import * as getByAgent from './getByAgent';
+import * as get from './get';
 
 import { INodeProperties } from 'n8n-workflow';
 
-export { getByAgent };
+export { getByAgent, get };
 
 export const description: INodeProperties[] = [
 		{
@@ -17,10 +18,16 @@ export const description: INodeProperties[] = [
 				},
 				options: [
 						{
+								name: 'Get Software',
+								value: 'get',
+								description: 'Retrieve software',
+								action: 'Get Software',
+						},
+						{
 								name: 'Get By Agent',
 								value: 'getByAgent',
 								description: 'Retrieve software by agent',
-								action: 'Get software',
+								action: 'Get Software By Agent',
 						},
 				],
 				default: 'getByAgent',
