@@ -1,4 +1,4 @@
-# n8n-nodes_tacticalrmm
+# n8n-nodes-tacticalrmm
 
 This is an n8n community node. It lets you use TacticalRMM in your n8n workflows.
 
