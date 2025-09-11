@@ -25,8 +25,8 @@ export class TacticalRMM implements INodeType {
 				defaults: {
 						name: 'Tactical RMM',
 				},
-				inputs: [{ type: NodeConnectionType.Main }],
-				outputs: [{ type: NodeConnectionType.Main }],
+				inputs: [NodeConnectionType.Main],
+				outputs: [NodeConnectionType.Main],
 				credentials: [
 						{
 								name: 'tacticalRMMApi',
