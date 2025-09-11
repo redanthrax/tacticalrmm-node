@@ -7,6 +7,7 @@ import {
 	IExecuteFunctions,
 	INodeType,
 	INodeTypeDescription,
+	NodeConnectionType,
 } from 'n8n-workflow';
 
 import { loadOptions } from './methods';
@@ -24,8 +25,8 @@ export class TacticalRMM implements INodeType {
 				defaults: {
 						name: 'Tactical RMM',
 				},
-				inputs: ['main'],
-				outputs: ['main'],
+				inputs: [{ type: NodeConnectionType.Main }],
+				outputs: [{ type: NodeConnectionType.Main }],
 				credentials: [
 						{
 								name: 'tacticalRMMApi',
