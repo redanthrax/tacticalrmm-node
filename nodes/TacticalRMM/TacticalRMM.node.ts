@@ -1,12 +1,12 @@
-import { IExecuteFunctions } from 'n8n-core';
 import * as agent from './actions/agent';
 import * as client from './actions/client';
 import * as alert from './actions/alert';
 import * as software from './actions/software';
 
 import {
-		INodeType,
-		INodeTypeDescription,
+	IExecuteFunctions,
+	INodeType,
+	INodeTypeDescription,
 } from 'n8n-workflow';
 
 import { loadOptions } from './methods';
@@ -15,9 +15,9 @@ import { router } from './actions/router';
 export class TacticalRMM implements INodeType {
 		description: INodeTypeDescription = {
 				displayName: 'Tactical RMM',
-				name: 'TacticalRMM',
+				name: 'tacticalRmm',
 				icon: 'file:trmm.svg',
-				group: ['transorm'],
+			group: ['transform'],
 				version: 1,
 				subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 				description: 'Get data from the TacticalRMM API',
