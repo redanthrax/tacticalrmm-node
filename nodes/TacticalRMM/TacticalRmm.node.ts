@@ -13,7 +13,7 @@ import {
 import { loadOptions } from './methods';
 import { router } from './actions/router';
 
-export class TacticalRMM implements INodeType {
+export class TacticalRmm implements INodeType {
 		description: INodeTypeDescription = {
 				displayName: 'Tactical RMM',
 				name: 'tacticalRmm',

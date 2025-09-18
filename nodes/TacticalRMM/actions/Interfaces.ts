@@ -1,10 +1,10 @@
 import { AllEntities, Entity, PropertiesOf } from 'n8n-workflow';
 
 type TacticalRMMMap = {
-		agent: 'getAll' | 'getById' | 'getByClient';
-		alert: 'getAll';
-		client: 'getAll' | 'getById';
-				software: 'getByAgent';
+	agent: 'getAll' | 'getById' | 'getByClient' | 'update' | 'deleteAgent' | 'runCommand' | 'reboot' | 'getProcesses' | 'getChecks' | 'shutdown' | 'runScript' | 'getTasks' | 'ping' | 'getNotes' | 'addNote' | 'getEventLog' | 'getHistory' | 'bulkAction';
+	alert: 'getAll';
+	client: 'getAll' | 'getById';
+			software: 'getByAgent';
 };
 
 export type TacticalRMM = AllEntities<TacticalRMMMap>;

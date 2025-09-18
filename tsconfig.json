@@ -1,19 +1,18 @@
 {
 	"compilerOptions": {
-		"lib": [
-			"es2017",
-			"es2019"
-		],
-		"types": [
-			"node",
-		],
+		"lib": ["es2019", "es2020", "es2022.error"],
 		"module": "commonjs",
-		"noImplicitAny": false,
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"forceConsistentCasingInFileNames": true,
 		"removeComments": true,
 		"strictNullChecks": true,
 		"strict": true,
 		"preserveConstEnums": true,
 		"resolveJsonModule": true,
+		"incremental": true,
 		"declaration": true,
 		"outDir": "./dist/",
 		"target": "es2019",
