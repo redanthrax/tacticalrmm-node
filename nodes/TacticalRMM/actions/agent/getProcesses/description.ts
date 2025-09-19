@@ -15,4 +15,20 @@ export const agentGetProcessesDescription: AgentProperties = [
 		default: '',
 		description: 'ID of the agent to get processes from',
 	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		displayOptions: {
+			show: {
+				resource: ['agent'],
+				operation: ['getProcesses'],
+			},
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		typeOptions: {
+			minValue: 1,
+		},
+	},
 ];

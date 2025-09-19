@@ -8,7 +8,10 @@ export async function getAll(
 		this: IExecuteFunctions,
 		index: number,
 ): Promise<INodeExecutionData[]> {
-		const qs = {} as IDataObject;
+		const limit = this.getNodeParameter('limit', index) as number;
+		const qs = {
+			limit,
+		} as IDataObject;
 		const requestMethod = 'GET';
 		const endpoint = '/clients';
 		const body = {} as IDataObject;

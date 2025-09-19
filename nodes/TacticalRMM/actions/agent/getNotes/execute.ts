@@ -6,8 +6,9 @@ export async function getNotes(
 	index: number,
 ): Promise<INodeExecutionData[]> {
 	const agentId = this.getNodeParameter('agentId', index) as string;
+	const limit = this.getNodeParameter('limit', index) as number;
 
-	const responseData = await tacticalApiRequest.call(this, 'GET', `/agents/${agentId}/notes/`);
+	const responseData = await tacticalApiRequest.call(this, 'GET', `/agents/${agentId}/notes/?limit=${limit}`);
 
 	return this.helpers.returnJsonArray(responseData as any);
 }

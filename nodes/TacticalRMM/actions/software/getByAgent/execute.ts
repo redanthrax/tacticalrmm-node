@@ -10,9 +10,12 @@ export async function getByAgent(
 ): Promise<INodeExecutionData[]> {
 		const requestMethod = 'GET';
 		const body = {} as IDataObject;
-				const qs = {} as IDataObject;
 		const agentId = this.getNodeParameter('agentId', index) as string;
-				const endpoint = `/software/${agentId}/`;
+		const limit = this.getNodeParameter('limit', index) as number;
+		const qs = {
+			limit,
+		} as IDataObject;
+		const endpoint = `/software/${agentId}/`;
 		const responseData = await apiRequest.call(this, requestMethod, endpoint, body, qs);
 		if (responseData.software) {
 						responseData.software = responseData.software.sort((a: any, b: any) => a.name.localeCompare(b.name));

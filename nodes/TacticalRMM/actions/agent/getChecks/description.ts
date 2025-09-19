@@ -15,4 +15,20 @@ export const agentGetChecksDescription: AgentProperties = [
 		default: '',
 		description: 'ID of the agent to get checks from',
 	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		displayOptions: {
+			show: {
+				resource: ['agent'],
+				operation: ['getChecks'],
+			},
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		typeOptions: {
+			minValue: 1,
+		},
+	},
 ];

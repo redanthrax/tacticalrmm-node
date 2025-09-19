@@ -53,8 +53,24 @@ export const agentGetEventLogDescription: AgentProperties = [
 				operation: ['getEventLog'],
 			},
 		},
-		default: 1,
+	default: 1,
 	description: 'Number of days to look back for events',
+	},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		displayOptions: {
+			show: {
+				resource: ['agent'],
+				operation: ['getEventLog'],
+			},
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		typeOptions: {
+			minValue: 1,
+		},
 	},
 ];
 

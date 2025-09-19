@@ -13,6 +13,22 @@ export const softwareGetByAgentDescription: SoftwareProperties = [
 								resource: ['software'],
 						},
 				},
-				description: 'Get software by the agent',
+			description: 'Get software by the agent',
 		},
+	{
+		displayName: 'Limit',
+		name: 'limit',
+		type: 'number',
+		displayOptions: {
+			show: {
+				resource: ['software'],
+				operation: ['getByAgent'],
+			},
+		},
+		default: 50,
+		description: 'Max number of results to return',
+		typeOptions: {
+			minValue: 1,
+		},
+	},
 ];
