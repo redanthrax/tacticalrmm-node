@@ -34,6 +34,9 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
 				case 'client':
 					resourceModule = await import('./client');
 					break;
+				case 'site':
+					resourceModule = await import('./site');
+					break;
 				case 'software':
 					resourceModule = await import('./software');
 					break;

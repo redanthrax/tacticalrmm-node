@@ -158,4 +158,47 @@ export const agentUpdateDescription: AgentProperties = [
 		default: '',
 		description: 'Policy ID to apply to this agent',
 	},
+	{
+		displayName: 'Custom Fields',
+		name: 'custom_fields',
+		type: 'fixedCollection',
+		default: {},
+		description: 'Custom fields for the agent',
+		placeholder: 'Add Custom Field',
+		displayOptions: {
+			show: {
+				resource: ['agent'],
+				operation: ['update'],
+			},
+		},
+		typeOptions: {
+			multipleValues: true,
+		},
+		options: [
+			{
+				name: 'fields',
+				displayName: 'Field',
+				values: [
+					{
+						displayName: 'Field Name or ID',
+						name: 'name',
+						type: 'options',
+						default: '',
+						description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+						typeOptions: {
+							loadOptionsMethod: 'getCustomFields',
+						},
+						options: [],
+					},
+					{
+						displayName: 'Value',
+						name: 'value',
+						type: 'string',
+						default: '',
+						description: 'The value for this custom field',
+					},
+				],
+			},
+		],
+	},
 ];

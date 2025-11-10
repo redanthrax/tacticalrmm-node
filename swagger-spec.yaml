@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Tactical RMM API
-  version: 1.2.0
+  version: 1.3.1
   description: Simple and Fast remote monitoring and management tool
 paths:
   /:
@@ -1423,20 +1423,6 @@ paths:
       responses:
         '200':
           description: No response body
-  /api/v3/{id}/chocoresult/:
-    patch:
-      operationId: api_v3_chocoresult_partial_update
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: integer
-        required: true
-      tags:
-      - api
-      responses:
-        '200':
-          description: No response body
   /api/v3/checkin/:
     post:
       operationId: api_v3_checkin_create
@@ -2809,6 +2795,56 @@ paths:
       responses:
         '200':
           description: No response body
+  /core/schedules/:
+    get:
+      operationId: core_schedules_retrieve
+      tags:
+      - core
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
+    post:
+      operationId: core_schedules_create
+      tags:
+      - core
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
+  /core/schedules/{id}/:
+    put:
+      operationId: core_schedules_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - core
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
+    delete:
+      operationId: core_schedules_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - core
+      security:
+      - API Key Auth: []
+      responses:
+        '204':
+          description: No response body
   /core/servermaintenance/:
     post:
       operationId: core_servermaintenance_create
@@ -3189,6 +3225,52 @@ paths:
       responses:
         '204':
           description: No response body
+  /reporting/history/:
+    get:
+      operationId: reporting_history_retrieve
+      tags:
+      - reporting
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportHistory'
+          description: ''
+  /reporting/history/{id}/:
+    delete:
+      operationId: reporting_history_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - reporting
+      security:
+      - API Key Auth: []
+      responses:
+        '204':
+          description: No response body
+  /reporting/history/{id}/run/:
+    post:
+      operationId: reporting_history_run_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - reporting
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
   /reporting/htmltemplates/:
     get:
       operationId: reporting_htmltemplates_retrieve
@@ -3257,6 +3339,127 @@ paths:
   /reporting/queryschema/:
     get:
       operationId: reporting_queryschema_retrieve
+      tags:
+      - reporting
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
+  /reporting/schedules/:
+    get:
+      operationId: reporting_schedules_retrieve
+      tags:
+      - reporting
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSchedule'
+          description: ''
+    post:
+      operationId: reporting_schedules_create
+      tags:
+      - reporting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportSchedule'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportSchedule'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportSchedule'
+        required: true
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSchedule'
+          description: ''
+  /reporting/schedules/{id}/:
+    get:
+      operationId: reporting_schedules_retrieve_2
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - reporting
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSchedule'
+          description: ''
+    put:
+      operationId: reporting_schedules_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - reporting
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportSchedule'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReportSchedule'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ReportSchedule'
+        required: true
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSchedule'
+          description: ''
+    delete:
+      operationId: reporting_schedules_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - reporting
+      security:
+      - API Key Auth: []
+      responses:
+        '204':
+          description: No response body
+  /reporting/schedules/{id}/run/:
+    post:
+      operationId: reporting_schedules_run_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
       tags:
       - reporting
       security:
@@ -3368,6 +3571,22 @@ paths:
       - API Key Auth: []
       responses:
         '204':
+          description: No response body
+  /reporting/templates/{id}/email/:
+    post:
+      operationId: reporting_templates_email_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - reporting
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
           description: No response body
   /reporting/templates/{id}/export/:
     post:
@@ -3771,6 +3990,23 @@ paths:
       responses:
         '200':
           description: No response body
+  /software/{agent_id}/uninstall/:
+    post:
+      operationId: software_uninstall_create
+      parameters:
+      - in: path
+        name: agent_id
+        schema:
+          type: string
+          pattern: ^[^/]{20}[^/]+$
+        required: true
+      tags:
+      - software
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
   /software/chocos/:
     get:
       operationId: software_chocos_retrieve
@@ -4000,6 +4236,16 @@ components:
       - id
       - modified_time
       - name
+    FormatEnum:
+      enum:
+      - pdf
+      - html
+      - plaintext
+      type: string
+      description: |-
+        * `pdf` - Pdf
+        * `html` - Html
+        * `plaintext` - Plain Text
     GoarchEnum:
       enum:
       - amd64
@@ -4216,12 +4462,109 @@ components:
         * `windows` - Windows
         * `linux` - Linux
         * `darwin` - macOS
+    ReportHistory:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        report_template:
+          type: integer
+        report_template_name:
+          type: string
+          readOnly: true
+        report_template_type:
+          allOf:
+          - $ref: '#/components/schemas/ReportTemplateTypeEnum'
+          readOnly: true
+        run_by:
+          type: string
+          maxLength: 255
+        error_data:
+          type: string
+          nullable: true
+        date_created:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - date_created
+      - id
+      - report_template
+      - report_template_name
+      - report_template_type
+    ReportSchedule:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        enabled:
+          type: boolean
+        report_template:
+          type: integer
+        report_template_name:
+          type: string
+          readOnly: true
+        format:
+          $ref: '#/components/schemas/FormatEnum'
+        schedule:
+          type: integer
+        schedule_name:
+          type: string
+          readOnly: true
+        email_recipients:
+          type: array
+          items:
+            type: string
+            format: email
+            maxLength: 254
+        dependencies: {}
+        send_report_email:
+          type: boolean
+        last_run:
+          type: string
+          format: date-time
+          nullable: true
+        email_settings: {}
+        timezone:
+          type: string
+          nullable: true
+          maxLength: 100
+      required:
+      - id
+      - name
+      - report_template
+      - report_template_name
+      - schedule
+      - schedule_name
     ReportTemplate:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
+        created_by:
+          type: string
+          nullable: true
+          maxLength: 255
+        created_time:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
+        modified_by:
+          type: string
+          nullable: true
+          maxLength: 255
+        modified_time:
+          type: string
+          format: date-time
+          readOnly: true
+          nullable: true
         name:
           type: string
           maxLength: 200
@@ -4243,9 +4586,21 @@ components:
           type: integer
           nullable: true
       required:
+      - created_time
       - id
+      - modified_time
       - name
       - template_md
+    ReportTemplateTypeEnum:
+      enum:
+      - markdown
+      - html
+      - plaintext
+      type: string
+      description: |-
+        * `markdown` - Markdown
+        * `html` - Html
+        * `plaintext` - Plain Text
     Site:
       type: object
       properties:

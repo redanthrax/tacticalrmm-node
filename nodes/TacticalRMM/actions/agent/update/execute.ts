@@ -20,6 +20,7 @@ export async function update(
 	const blockPolicyInheritance = this.getNodeParameter('blockPolicyInheritance', index, false) as boolean;
 	const alertTemplate = this.getNodeParameter('alertTemplate', index, null) as number | null;
 	const policy = this.getNodeParameter('policy', index, null) as number | null;
+	const customFields = this.getNodeParameter('custom_fields', index, {}) as IDataObject;
 
 	const requestMethod = 'PUT';
 	const endpoint = `/agents/${agentId}`;
@@ -37,6 +38,18 @@ export async function update(
 		alert_template: alertTemplate,
 		policy: policy,
 	} as IDataObject;
+
+	if (customFields.fields && Array.isArray(customFields.fields)) {
+		const fields: IDataObject[] = [];
+		for (const field of customFields.fields) {
+			const fieldData = field as IDataObject;
+			fields.push({
+				name: fieldData.name,
+				value: fieldData.value,
+			});
+		}
+		body.custom_fields = fields;
+	}
 
 	// Remove null/empty values
 	Object.keys(body).forEach(key => {

@@ -1,6 +1,7 @@
 import * as agent from './actions/agent';
 import * as alert from './actions/alert';
 import * as client from './actions/client';
+import * as site from './actions/site';
 import * as software from './actions/software';
 
 import {
@@ -56,6 +57,10 @@ export class TacticalRmm implements INodeType {
 						value: 'client',
 					},
 					{
+						name: 'Site',
+						value: 'site',
+					},
+					{
 						name: 'Software',
 						value: 'software',
 					},
@@ -65,6 +70,7 @@ export class TacticalRmm implements INodeType {
 			...agent.description,
 			...alert.description,
 			...client.description,
+			...site.description,
 			...software.description,
 		],
 	};
@@ -90,6 +96,47 @@ export class TacticalRmm implements INodeType {
 									name: client.name,
 									value: client.id.toString(),
 									description: client.name || '',
+								});
+							}
+						}
+					}
+					return options.sort((a, b) => a.name.localeCompare(b.name));
+				} catch (error) {
+					return [];
+				}
+			},
+			getCustomFields: async function(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+				Logger.debug('Loading custom fields for TacticalRMM node', { node: this.getNode().name });
+				const { apiRequest } = await import('./transport');
+				const resource = this.getCurrentNodeParameter('resource') as string;
+
+				const modelMapping: Record<string, string> = {
+					agent: 'agent',
+					client: 'client',
+					site: 'site',
+				};
+
+				const model = modelMapping[resource];
+				if (!model) {
+					return [];
+				}
+
+				try {
+					const requestMethod = 'GET';
+					const endpoint = '/core/customfields/';
+					const body = {};
+					const qs = { model };
+
+					const responseData = await apiRequest.call(this, requestMethod, endpoint, body, qs);
+
+					const options: INodePropertyOptions[] = [];
+					if (Array.isArray(responseData)) {
+						for (const field of responseData) {
+							if (field.id && field.name) {
+								options.push({
+									name: field.name,
+									value: field.name,
+									description: field.type || '',
 								});
 							}
 						}
