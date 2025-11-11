@@ -57,6 +57,19 @@ export const agentGetEventLogDescription: AgentProperties = [
 	description: 'Number of days to look back for events',
 	},
 	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: ['agent'],
+				operation: ['getEventLog'],
+			},
+		},
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+	},
+	{
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
@@ -64,6 +77,7 @@ export const agentGetEventLogDescription: AgentProperties = [
 			show: {
 				resource: ['agent'],
 				operation: ['getEventLog'],
+				returnAll: [false],
 			},
 		},
 		default: 50,

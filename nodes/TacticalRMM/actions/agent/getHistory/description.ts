@@ -47,6 +47,19 @@ export const agentGetHistoryDescription: AgentProperties = [
 	description: 'Time period for history retrieval',
 	},
 	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: ['agent'],
+				operation: ['getHistory'],
+			},
+		},
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+	},
+	{
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
@@ -54,6 +67,7 @@ export const agentGetHistoryDescription: AgentProperties = [
 			show: {
 				resource: ['agent'],
 				operation: ['getHistory'],
+				returnAll: [false],
 			},
 		},
 		default: 50,

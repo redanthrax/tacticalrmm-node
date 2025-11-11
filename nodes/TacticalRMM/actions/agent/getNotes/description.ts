@@ -12,8 +12,21 @@ export const agentGetNotesDescription: AgentProperties = [
 				operation: ['getNotes'],
 			},
 		},
-		default: '',
-		description: 'ID of the agent to get notes for',
+	default: '',
+	description: 'ID of the agent to get notes for',
+	},
+	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: ['agent'],
+				operation: ['getNotes'],
+			},
+		},
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
 	},
 	{
 		displayName: 'Limit',
@@ -23,6 +36,7 @@ export const agentGetNotesDescription: AgentProperties = [
 			show: {
 				resource: ['agent'],
 				operation: ['getNotes'],
+				returnAll: [false],
 			},
 		},
 		default: 50,

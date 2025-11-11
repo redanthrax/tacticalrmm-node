@@ -2,6 +2,19 @@ import { INodeProperties } from 'n8n-workflow';
 
 export const siteGetAllDescription: INodeProperties[] = [
 	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: ['site'],
+				operation: ['getAll'],
+			},
+		},
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+	},
+	{
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
@@ -9,6 +22,7 @@ export const siteGetAllDescription: INodeProperties[] = [
 			show: {
 				resource: ['site'],
 				operation: ['getAll'],
+				returnAll: [false],
 			},
 		},
 		typeOptions: {

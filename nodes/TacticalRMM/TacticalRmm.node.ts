@@ -1,8 +1,22 @@
 import * as agent from './actions/agent';
 import * as alert from './actions/alert';
+import * as automation from './actions/automation';
+import * as check from './actions/check';
 import * as client from './actions/client';
+import * as script from './actions/script';
+import * as service from './actions/service';
 import * as site from './actions/site';
+import * as task from './actions/task';
 import * as software from './actions/software';
+import * as winupdate from './actions/winupdate';
+import * as alertTemplate from './actions/alertTemplate';
+import * as apiKey from './actions/apiKey';
+import * as core from './actions/core';
+import * as deployment from './actions/deployment';
+import * as role from './actions/role';
+import * as user from './actions/user';
+import * as reporting from './actions/reporting';
+import * as logs from './actions/logs';
 
 import {
 	IExecuteFunctions,
@@ -53,25 +67,95 @@ export class TacticalRmm implements INodeType {
 						value: 'alert',
 					},
 					{
+						name: 'Alert Template',
+						value: 'alertTemplate',
+					},
+					{
+						name: 'API Key',
+						value: 'apiKey',
+					},
+					{
+						name: 'Automation',
+						value: 'automation',
+					},
+					{
+						name: 'Check',
+						value: 'check',
+					},
+					{
 						name: 'Client',
 						value: 'client',
+					},
+					{
+						name: 'Core',
+						value: 'core',
+					},
+					{
+						name: 'Deployment',
+						value: 'deployment',
+					},
+					{
+						name: 'Logs',
+						value: 'logs',
+					},
+					{
+						name: 'Reporting',
+						value: 'reporting',
+					},
+					{
+						name: 'Role',
+						value: 'role',
+					},
+					{
+						name: 'Script',
+						value: 'script',
+					},
+					{
+						name: 'Service',
+						value: 'service',
 					},
 					{
 						name: 'Site',
 						value: 'site',
 					},
 					{
+						name: 'Task',
+						value: 'task',
+					},
+					{
+						name: 'User',
+						value: 'user',
+					},
+					{
 						name: 'Software',
 						value: 'software',
+					},
+					{
+						name: 'Windows Updates',
+						value: 'winupdate',
 					},
 				],
 				default: 'agent',
 			},
 			...agent.description,
 			...alert.description,
+			...automation.description,
+			...check.description,
 			...client.description,
+			...script.description,
+			...service.description,
 			...site.description,
+			...task.description,
 			...software.description,
+			...winupdate.description,
+			...alertTemplate.description,
+			...apiKey.description,
+			...core.description,
+			...deployment.description,
+			...role.description,
+			...user.description,
+			...reporting.description,
+			...logs.description,
 		],
 	};
 

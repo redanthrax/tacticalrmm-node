@@ -2,6 +2,19 @@ import { AlertProperties } from '../../Interfaces';
 
 export const alertGetAllDescription: AlertProperties = [
 	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: ['alert'],
+				operation: ['getAll'],
+			},
+		},
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+	},
+	{
 		displayName: 'Limit',
 		name: 'limit',
 		type: 'number',
@@ -9,6 +22,7 @@ export const alertGetAllDescription: AlertProperties = [
 			show: {
 				resource: ['alert'],
 				operation: ['getAll'],
+				returnAll: [false],
 			},
 		},
 		default: 50,

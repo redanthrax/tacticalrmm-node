@@ -12,11 +12,15 @@ export async function getByClient(
 	const endpoint = '/agents';
 	const body = {} as IDataObject;
 	const clientId = this.getNodeParameter('clientId', index) as number;
-	const limit = this.getNodeParameter('limit', index) as number;
-	const qs = {
+	const returnAll = this.getNodeParameter('returnAll', index, false) as boolean;
+	const qs: IDataObject = {
 			client: clientId,
-			limit,
-	} as IDataObject;
+	};
+	
+	if (!returnAll) {
+		const limit = this.getNodeParameter('limit', index) as number;
+		qs.limit = limit;
+	}
 
 		let responseData;
 		responseData = await apiRequest.call(this, requestMethod, endpoint, body, qs);

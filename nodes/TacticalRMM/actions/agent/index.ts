@@ -16,6 +16,15 @@ import * as addNote from './addNote';
 import * as getEventLog from './getEventLog';
 import * as getHistory from './getHistory';
 import * as bulkAction from './bulkAction';
+import * as wakeOnLan from './wakeOnLan';
+import * as recover from './recover';
+import * as getPendingActions from './getPendingActions';
+import * as deletePendingActions from './deletePendingActions';
+import * as getScriptHistory from './getScriptHistory';
+import * as getVersions from './getVersions';
+import * as bulkRecovery from './bulkRecovery';
+import * as bulkMaintenanceMode from './bulkMaintenanceMode';
+import * as bulkUpdate from './bulkUpdate';
 
 import { INodeProperties } from 'n8n-workflow';
 
@@ -38,6 +47,15 @@ export {
 	getEventLog,
 	getHistory,
 	bulkAction,
+	wakeOnLan,
+	recover,
+	getPendingActions,
+	deletePendingActions,
+	getScriptHistory,
+	getVersions,
+	bulkRecovery,
+	bulkMaintenanceMode,
+	bulkUpdate,
 };
 
 export const description: INodeProperties[] = [
@@ -65,10 +83,34 @@ export const description: INodeProperties[] = [
 								action: 'Bulk action on agents',
 						},
 						{
+								name: 'Bulk Maintenance Mode',
+								value: 'bulkMaintenanceMode',
+								description: 'Set maintenance mode for multiple agents',
+								action: 'Set bulk maintenance mode',
+						},
+						{
+								name: 'Bulk Recovery',
+								value: 'bulkRecovery',
+								description: 'Get bulk agent recovery status',
+								action: 'Get bulk recovery status',
+						},
+						{
+								name: 'Bulk Update',
+								value: 'bulkUpdate',
+								description: 'Update multiple agents',
+								action: 'Bulk update agents',
+						},
+						{
 								name: 'Delete',
 								value: 'deleteAgent',
 								description: 'Delete an agent',
 								action: 'Delete an agent',
+						},
+						{
+								name: 'Delete Pending Actions',
+								value: 'deletePendingActions',
+								description: 'Clear pending actions for an agent',
+								action: 'Delete pending actions',
 						},
 						{
 								name: 'Get By Client',
@@ -107,6 +149,12 @@ export const description: INodeProperties[] = [
 								action: 'Get many agents',
 						},
 						{
+								name: 'Get Pending Actions',
+								value: 'getPendingActions',
+								description: 'Get pending actions for an agent',
+								action: 'Get pending actions',
+						},
+						{
 								name: 'Get Notes',
 								value: 'getNotes',
 								description: 'Get notes for agent',
@@ -119,10 +167,22 @@ export const description: INodeProperties[] = [
 								action: 'Get agent processes',
 						},
 						{
+								name: 'Get Script History',
+								value: 'getScriptHistory',
+								description: 'Get script execution history',
+								action: 'Get script history',
+						},
+						{
 								name: 'Get Tasks',
 								value: 'getTasks',
 								description: 'Get scheduled tasks for agent',
 								action: 'Get agent tasks',
+						},
+						{
+								name: 'Get Versions',
+								value: 'getVersions',
+								description: 'Get agent software versions',
+								action: 'Get agent versions',
 						},
 						{
 								name: 'Ping',
@@ -135,6 +195,12 @@ export const description: INodeProperties[] = [
 								value: 'reboot',
 								description: 'Reboot an agent',
 								action: 'Reboot an agent',
+						},
+						{
+								name: 'Recover',
+								value: 'recover',
+								description: 'Recover a disconnected agent',
+								action: 'Recover agent',
 						},
 						{
 								name: 'Run Command',
@@ -160,6 +226,12 @@ export const description: INodeProperties[] = [
 								description: 'Update an agent',
 								action: 'Update an agent',
 						},
+						{
+								name: 'Wake On LAN',
+								value: 'wakeOnLan',
+								description: 'Wake an agent via Wake-on-LAN',
+								action: 'Wake agent',
+						},
 				],
 				default: 'getAll',
 		},
@@ -181,4 +253,13 @@ export const description: INodeProperties[] = [
 		...getEventLog.description,
 		...getHistory.description,
 		...bulkAction.description,
+		...wakeOnLan.description,
+		...recover.description,
+		...getPendingActions.description,
+		...deletePendingActions.description,
+		...getScriptHistory.description,
+		...getVersions.description,
+		...bulkRecovery.description,
+		...bulkMaintenanceMode.description,
+		...bulkUpdate.description,
 ];

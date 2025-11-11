@@ -12,8 +12,21 @@ export const agentGetTasksDescription: AgentProperties = [
 				operation: ['getTasks'],
 			},
 		},
-		default: '',
-		description: 'ID of the agent to get tasks from',
+	default: '',
+	description: 'ID of the agent to get tasks from',
+	},
+	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: ['agent'],
+				operation: ['getTasks'],
+			},
+		},
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
 	},
 	{
 		displayName: 'Limit',
@@ -23,6 +36,7 @@ export const agentGetTasksDescription: AgentProperties = [
 			show: {
 				resource: ['agent'],
 				operation: ['getTasks'],
+				returnAll: [false],
 			},
 		},
 		default: 50,

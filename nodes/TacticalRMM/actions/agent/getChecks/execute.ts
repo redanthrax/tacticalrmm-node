@@ -9,14 +9,17 @@ export async function getChecks(
 	index: number,
 ): Promise<INodeExecutionData[]> {
 	const agentId = this.getNodeParameter('agentId', index) as string;
-	const limit = this.getNodeParameter('limit', index) as number;
+	const returnAll = this.getNodeParameter('returnAll', index, false) as boolean;
 
 	const requestMethod = 'GET';
 	const endpoint = `/agents/${agentId}/checks`;
 	const body = {} as IDataObject;
-	const qs = {
-		limit,
-	} as IDataObject;
+	const qs: IDataObject = {};
+	
+	if (!returnAll) {
+		const limit = this.getNodeParameter('limit', index) as number;
+		qs.limit = limit;
+	}
 
 	let responseData;
 	responseData = await apiRequest.call(this, requestMethod, endpoint, body, qs);

@@ -8,13 +8,17 @@ export async function getEventLog(
 	const agentId = this.getNodeParameter('agentId', index) as string;
 	const logName = this.getNodeParameter('logName', index) as string;
 	const days = this.getNodeParameter('days', index, 1) as number;
-	const limit = this.getNodeParameter('limit', index) as number;
+	const returnAll = this.getNodeParameter('returnAll', index, false) as boolean;
 
-	const body = {
+	const body: any = {
 		logname: logName,
 		days: days,
-		limit: limit,
 	};
+	
+	if (!returnAll) {
+		const limit = this.getNodeParameter('limit', index) as number;
+		body.limit = limit;
+	}
 
 	const responseData = await tacticalApiRequest.call(this, 'POST', `/agents/${agentId}/geteventlog/`, body);
 

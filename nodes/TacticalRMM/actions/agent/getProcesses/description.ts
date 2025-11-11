@@ -12,8 +12,21 @@ export const agentGetProcessesDescription: AgentProperties = [
 				operation: ['getProcesses'],
 			},
 		},
-		default: '',
-		description: 'ID of the agent to get processes from',
+	default: '',
+	description: 'ID of the agent to get processes from',
+	},
+	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: ['agent'],
+				operation: ['getProcesses'],
+			},
+		},
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
 	},
 	{
 		displayName: 'Limit',
@@ -23,6 +36,7 @@ export const agentGetProcessesDescription: AgentProperties = [
 			show: {
 				resource: ['agent'],
 				operation: ['getProcesses'],
+				returnAll: [false],
 			},
 		},
 		default: 50,

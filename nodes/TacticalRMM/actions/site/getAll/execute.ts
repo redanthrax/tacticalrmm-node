@@ -3,10 +3,13 @@ import { IDataObject, INodeExecutionData } from 'n8n-workflow';
 import { apiRequest } from '../../../transport';
 
 export async function getAll(this: IExecuteFunctions, index: number): Promise<INodeExecutionData[]> {
-	const limit = this.getNodeParameter('limit', index) as number;
-	const qs = {
-		limit,
-	} as IDataObject;
+	const returnAll = this.getNodeParameter('returnAll', index, false) as boolean;
+	const qs: IDataObject = {};
+	
+	if (!returnAll) {
+		const limit = this.getNodeParameter('limit', index) as number;
+		qs.limit = limit;
+	}
 	const requestMethod = 'GET';
 	const endpoint = '/clients/sites/';
 	const body = {} as IDataObject;

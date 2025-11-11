@@ -13,8 +13,21 @@ export const softwareGetByAgentDescription: SoftwareProperties = [
 								resource: ['software'],
 						},
 				},
-			description: 'Get software by the agent',
+		description: 'Get software by the agent',
+	},
+	{
+		displayName: 'Return All',
+		name: 'returnAll',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				resource: ['software'],
+				operation: ['getByAgent'],
+			},
 		},
+		default: false,
+		description: 'Whether to return all results or only up to a given limit',
+	},
 	{
 		displayName: 'Limit',
 		name: 'limit',
@@ -23,6 +36,7 @@ export const softwareGetByAgentDescription: SoftwareProperties = [
 			show: {
 				resource: ['software'],
 				operation: ['getByAgent'],
+				returnAll: [false],
 			},
 		},
 		default: 50,
