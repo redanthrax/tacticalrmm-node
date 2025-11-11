@@ -34,17 +34,64 @@ npm install n8n-nodes-tacticalrmm
 
 ## Supported Operations
 
-### [Agents](./docs/agents.md)
-Complete agent management with CRUD operations, comprehensive filtering, and advanced control capabilities including remote commands, scripts, and system operations.
+**128 operations across 19 resources:**
 
-### [Alerts](./docs/alerts.md)
-Retrieve and manage system alerts with filtering capabilities.
+### [Agent](./docs/agents.md) (27 operations)
+Complete agent lifecycle management, monitoring, and control including remote commands, scripts, bulk operations, maintenance mode, recovery, and version management.
 
-### [Clients](./docs/clients.md)
-Manage client records with retrieval operations and organizational structure.
+### [Alert](./docs/alerts.md) (4 operations)
+Alert management with filtering and status updates.
 
-### [Software](./docs/software.md)
-Retrieve software inventory information from agents with comprehensive filtering options.
+### [Alert Template](./docs/alert-templates.md) (5 operations)
+Full CRUD operations for alert templates with email, SMS, and dashboard configurations.
+
+### [API Key](./docs/api-keys.md) (4 operations)
+API key lifecycle management with creation, updates, and expiration support.
+
+### [Automation](./docs/automation.md) (5 operations)
+Policy management with alert templates and exclusions support.
+
+### [Check](./docs/checks.md) (7 operations)
+Health monitoring with multiple check types (CPU, disk, memory, ping, script, service, event log).
+
+### [Client](./docs/clients.md) (5 operations)
+Full CRUD operations with custom fields support.
+
+### [Core](./docs/core.md) (5 operations)
+System monitoring, diagnostics, cache management, and configuration testing.
+
+### [Deployment](./docs/deployments.md) (5 operations)
+Agent deployment and installer generation management.
+
+### [Log](./docs/logs.md) (6 operations)
+Pending actions management and log retention configuration.
+
+### [Reporting](./docs/reporting.md) (8 operations)
+Report template management, execution, and distribution (run, email, export).
+
+### [Role](./docs/roles.md) (5 operations)
+Role-based access control with superuser privileges.
+
+### [Script](./docs/scripts.md) (12 operations)
+Script management, execution, testing, and code snippets (PowerShell, Batch, Python, Shell).
+
+### [Service](./docs/services.md) (3 operations)
+Windows service control (start/stop/restart) and monitoring.
+
+### [Site](./docs/sites.md) (5 operations)
+Full CRUD operations with client association and custom fields.
+
+### [Software](./docs/software.md) (6 operations)
+Software deployment, Chocolatey package management, installation and uninstallation.
+
+### [Task](./docs/tasks.md) (6 operations)
+Task scheduling and execution with multiple task types.
+
+### [User](./docs/users.md) (5 operations)
+User account management with password and profile fields.
+
+### [Windows Update](./docs/windows-updates.md) (3 operations)
+Update management with scanning and installation capabilities.
 
 ## Resources
 
