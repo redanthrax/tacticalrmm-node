@@ -16,7 +16,7 @@ export const deploymentCreateDescription: DeploymentProperties = [
 			loadOptionsMethod: 'getClients',
 		},
 		default: '',
-		description: 'Client for the deployment',
+		description: 'Client for the deployment. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 	},
 	{
 		displayName: 'Site Name or ID',
@@ -33,7 +33,7 @@ export const deploymentCreateDescription: DeploymentProperties = [
 			loadOptionsMethod: 'getSites',
 		},
 		default: '',
-		description: 'Site for the deployment',
+		description: 'Site for the deployment. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 	},
 	{
 		displayName: 'Install Method',

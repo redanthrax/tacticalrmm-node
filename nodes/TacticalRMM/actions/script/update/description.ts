@@ -93,7 +93,7 @@ export const scriptUpdateDescription: INodeProperties[] = [
 				type: 'options',
 				options: [
 					{
-						name: 'Built-in',
+						name: 'Built-In',
 						value: 'builtin',
 					},
 					{

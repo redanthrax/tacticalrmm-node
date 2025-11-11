@@ -20,13 +20,7 @@ export const description: INodeProperties[] = [
 								resource: ['software'],
 						},
 				},
-		options: [
-						{
-								name: 'Get All',
-								value: 'getAll',
-								description: 'Get all software across all agents',
-								action: 'Get all software',
-						},
+	options: [
 						{
 								name: 'Get By Agent',
 								value: 'getByAgent',
@@ -37,7 +31,13 @@ export const description: INodeProperties[] = [
 								name: 'Get Chocolatey Packages',
 								value: 'getChocos',
 								description: 'List available Chocolatey packages',
-								action: 'Get Chocolatey packages',
+								action: 'Get chocolatey packages',
+						},
+						{
+								name: 'Get Many',
+								value: 'getAll',
+								description: 'Get many software across',
+								action: 'Get many software',
 						},
 						{
 								name: 'Install',

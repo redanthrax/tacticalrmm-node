@@ -43,17 +43,19 @@ export const serviceControlDescription: INodeProperties[] = [
 			{
 				name: 'Restart',
 				value: 'restart',
+				action: 'Restart a service',
 			},
 			{
 				name: 'Start',
 				value: 'start',
+				action: 'Start a service',
 			},
 			{
 				name: 'Stop',
 				value: 'stop',
+				action: 'Stop a service',
 			},
 		],
 		default: 'start',
-		description: 'Action to perform on the service',
 	},
 ];

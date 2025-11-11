@@ -95,7 +95,7 @@ export class TacticalRmm implements INodeType {
 						value: 'deployment',
 					},
 					{
-						name: 'Logs',
+						name: 'Log',
 						value: 'logs',
 					},
 					{
@@ -119,6 +119,10 @@ export class TacticalRmm implements INodeType {
 						value: 'site',
 					},
 					{
+						name: 'Software',
+						value: 'software',
+					},
+					{
 						name: 'Task',
 						value: 'task',
 					},
@@ -127,11 +131,7 @@ export class TacticalRmm implements INodeType {
 						value: 'user',
 					},
 					{
-						name: 'Software',
-						value: 'software',
-					},
-					{
-						name: 'Windows Updates',
+						name: 'Windows Update',
 						value: 'winupdate',
 					},
 				],

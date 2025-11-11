@@ -142,24 +142,24 @@ export const description: INodeProperties[] = [
 								description: 'Get agent history',
 								action: 'Get agent history',
 						},
-						{
-								name: 'Get Many',
-								value: 'getAll',
-								description: 'Retrieve many agents',
-								action: 'Get many agents',
-						},
-						{
-								name: 'Get Pending Actions',
-								value: 'getPendingActions',
-								description: 'Get pending actions for an agent',
-								action: 'Get pending actions',
-						},
-						{
-								name: 'Get Notes',
-								value: 'getNotes',
-								description: 'Get notes for agent',
-								action: 'Get agent notes',
-						},
+					{
+						name: 'Get Many',
+						value: 'getAll',
+						description: 'Retrieve many agents',
+						action: 'Get many agents',
+					},
+					{
+						name: 'Get Notes',
+						value: 'getNotes',
+						description: 'Get notes for agent',
+						action: 'Get agent notes',
+					},
+					{
+						name: 'Get Pending Actions',
+						value: 'getPendingActions',
+						description: 'Get pending actions for an agent',
+						action: 'Get pending actions',
+					},
 						{
 								name: 'Get Processes',
 								value: 'getProcesses',

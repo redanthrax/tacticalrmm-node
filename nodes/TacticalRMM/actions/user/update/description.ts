@@ -32,6 +32,7 @@ export const userUpdateDescription: UserProperties = [
 				displayName: 'Email',
 				name: 'email',
 				type: 'string',
+				placeholder: 'name@email.com',
 				default: '',
 				description: 'Email address',
 			},
@@ -40,14 +41,12 @@ export const userUpdateDescription: UserProperties = [
 				name: 'first_name',
 				type: 'string',
 				default: '',
-				description: 'First name',
 			},
 			{
 				displayName: 'Last Name',
 				name: 'last_name',
 				type: 'string',
 				default: '',
-				description: 'Last name',
 			},
 			{
 				displayName: 'Is Active',

@@ -49,6 +49,7 @@ export const userCreateDescription: UserProperties = [
 				displayName: 'Email',
 				name: 'email',
 				type: 'string',
+				placeholder: 'name@email.com',
 				default: '',
 				description: 'Email address',
 			},
@@ -57,14 +58,12 @@ export const userCreateDescription: UserProperties = [
 				name: 'first_name',
 				type: 'string',
 				default: '',
-				description: 'First name',
 			},
 			{
 				displayName: 'Last Name',
 				name: 'last_name',
 				type: 'string',
 				default: '',
-				description: 'Last name',
 			},
 			{
 				displayName: 'Is Active',

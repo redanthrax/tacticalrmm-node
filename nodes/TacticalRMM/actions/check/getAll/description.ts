@@ -27,10 +27,9 @@ export const checkGetAllDescription: INodeProperties[] = [
 		},
 		typeOptions: {
 			minValue: 1,
-			maxValue: 500,
 		},
 		default: 50,
-		description: 'Maximum number of checks to return',
+		description: 'Max number of results to return',
 	},
 	{
 		displayName: 'Agent ID',

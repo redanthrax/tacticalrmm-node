@@ -41,9 +41,8 @@ export const winupdateGetManyDescription: INodeProperties[] = [
 		},
 		typeOptions: {
 			minValue: 1,
-			maxValue: 500,
 		},
 		default: 50,
-		description: 'Maximum number of updates to return',
+		description: 'Max number of results to return',
 	},
 ];

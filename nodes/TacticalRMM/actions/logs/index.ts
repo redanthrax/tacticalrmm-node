@@ -31,7 +31,6 @@ export const description: INodeProperties[] = [
 			{
 				name: 'Delete All Pending Actions',
 				value: 'deleteAllPendingActions',
-				description: 'Delete all pending actions',
 				action: 'Delete all pending actions',
 			},
 			{

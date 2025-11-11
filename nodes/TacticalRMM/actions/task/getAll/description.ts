@@ -27,9 +27,8 @@ export const taskGetAllDescription: INodeProperties[] = [
 		},
 		typeOptions: {
 			minValue: 1,
-			maxValue: 500,
 		},
 		default: 50,
-		description: 'Maximum number of tasks to return',
+		description: 'Max number of results to return',
 	},
 ];
