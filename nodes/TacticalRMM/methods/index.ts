@@ -1,1 +1,1 @@
-export * as loadOptions from './loadOptions';
+export { tacticalRmmLoadOptions as loadOptions } from './loadOptions';

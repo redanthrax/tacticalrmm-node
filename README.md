@@ -1,108 +1,125 @@
-# n8n-nodes-tacticalrmm
+# @redanthrax/n8n-nodes-tacticalrmm
 
-An n8n community node for integrating with TacticalRMM API.
+An n8n community node for integrating with the Tactical RMM API.
 
-Tactical RMM is a remote monitoring & management tool, built with Django and Vue.
+Tactical RMM is a remote monitoring and management tool, built with Django and Vue.
+
+## Development
+
+This repo uses **pnpm** with a committed lockfile and supply-chain controls in [`pnpm-workspace.yaml`](pnpm-workspace.yaml) (see [SECURITY.md](SECURITY.md)). After clone:
+
+```bash
+corepack enable && corepack prepare pnpm@10.19.0 --activate
+pnpm install --frozen-lockfile
+pnpm run audit:supply-chain
+pnpm run build
+```
+
+Use **pnpm only** for installs in this repo. With Corepack enabled, `npm install` and `yarn install` are rejected. Do not commit `package-lock.json` or `yarn.lock` (see [SECURITY.md](SECURITY.md)).
+
+### API spec and catalog
+
+The OpenAPI spec lives at [`docs/swagger.yaml`](docs/swagger.yaml). Regenerate the endpoint catalog:
+
+```bash
+pnpm run generate
+```
+
+See [`docs/api-catalog.md`](docs/api-catalog.md) for every automation-facing endpoint. Use the **Custom API** resource for endpoints not covered by curated operations.
+
+### Live preview with `n8n-node dev`
+
+```bash
+n8n-node dev
+```
+
+Requires **Node.js 22.22.3+**.
 
 ## Installation
 
 Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
 
 ```bash
-npm install n8n-nodes-tacticalrmm
+npm install @redanthrax/n8n-nodes-tacticalrmm
 ```
 
 ## Prerequisites
 
-- TacticalRMM instance with API access
-- API Key from TacticalRMM
-- Your TacticalRMM base URL (e.g., https://your-domain.example.com)
+- Tactical RMM instance with API access
+- Your Tactical RMM base URL (e.g. `https://api.example.com`)
+- A dedicated integration user, integration role, and API key (see setup below)
 
 ## Setup
 
-### Setting up API Key in TacticalRMM
+### API access in Tactical RMM (recommended)
 
-1. Log into your TacticalRMM instance
-2. Navigate to Settings > Global Settings > API Keys
-3. Create a new API key
-4. Note down the API Key for use in n8n
+Do not reuse a personal admin account for n8n. Create a dedicated integration setup with least privilege:
 
-### Configuring Credentials in n8n
+1. **Integration role** — In Tactical RMM, create a role scoped only to the clients, sites, and actions your workflows need (read-only where possible).
+2. **Integration user** — Create a service/integration user account and assign only that role.
+3. **API key** — In **Settings → Global Settings → API Keys**, create a key for the integration user (not a day-to-day admin account).
 
-1. **Base API URL**: Your TacticalRMM instance URL (e.g., https://your-domain.example.com)
-2. **API Key**: The API key from TacticalRMM
+Rotate or revoke the API key if the n8n credential is exposed. Tighten the role if you add workflows later.
 
-## Supported Operations
+### Configuring credentials in n8n
 
-**128 operations across 19 resources:**
+| Field | Example | Notes |
+|-------|---------|-------|
+| **Base API URL** | `https://api.example.com` | Your Tactical RMM server URL |
+| **API Key** | *(from API Keys settings)* | Key for the integration user; sent as `X-API-KEY` |
 
-### [Agent](./docs/agents.md) (27 operations)
-Complete agent lifecycle management, monitoring, and control including remote commands, scripts, bulk operations, maintenance mode, recovery, and version management.
+## Supported operations
 
-### [Alert](./docs/alerts.md) (4 operations)
-Alert management with filtering and status updates.
+**129+ operations across 20 resources** (including Custom API for any path in the OpenAPI spec):
 
-### [Alert Template](./docs/alert-templates.md) (5 operations)
-Full CRUD operations for alert templates with email, SMS, and dashboard configurations.
+### Resource groups
 
-### [API Key](./docs/api-keys.md) (4 operations)
-API key lifecycle management with creation, updates, and expiration support.
+| Group | Resources |
+|-------|-----------|
+| **Agents** | Agent, Check, Service, Software, Task, Windows Update |
+| **Organization** | Client, Site, Deployment |
+| **Monitoring** | Alert, Alert Template |
+| **Automation** | Automation Policy, Script |
+| **Administration** | API Key, Core, Log, Role, User |
+| **Reporting** | Reporting |
+| **Advanced** | Custom API |
 
-### [Automation](./docs/automation.md) (5 operations)
-Policy management with alert templates and exclusions support.
+### Curated resources
 
-### [Check](./docs/checks.md) (7 operations)
-Health monitoring with multiple check types (CPU, disk, memory, ping, script, service, event log).
+- [Agent](./docs/agents.md) (27 operations)
+- [Alert](./docs/alerts.md)
+- [Alert Template](./docs/alert-templates.md)
+- [API Key](./docs/api-keys.md)
+- [Automation](./docs/automation.md)
+- [Check](./docs/checks.md)
+- [Client](./docs/clients.md)
+- [Core](./docs/core.md)
+- [Deployment](./docs/deployments.md)
+- [Log](./docs/logs.md)
+- [Reporting](./docs/reporting.md)
+- [Role](./docs/roles.md)
+- [Script](./docs/scripts.md)
+- [Service](./docs/services.md)
+- [Site](./docs/sites.md)
+- [Software](./docs/software.md)
+- [Task](./docs/tasks.md)
+- [User](./docs/users.md)
+- [Windows Update](./docs/windows-updates.md)
 
-### [Client](./docs/clients.md) (5 operations)
-Full CRUD operations with custom fields support.
+### Custom API
 
-### [Core](./docs/core.md) (5 operations)
-System monitoring, diagnostics, cache management, and configuration testing.
-
-### [Deployment](./docs/deployments.md) (5 operations)
-Agent deployment and installer generation management.
-
-### [Log](./docs/logs.md) (6 operations)
-Pending actions management and log retention configuration.
-
-### [Reporting](./docs/reporting.md) (8 operations)
-Report template management, execution, and distribution (run, email, export).
-
-### [Role](./docs/roles.md) (5 operations)
-Role-based access control with superuser privileges.
-
-### [Script](./docs/scripts.md) (12 operations)
-Script management, execution, testing, and code snippets (PowerShell, Batch, Python, Shell).
-
-### [Service](./docs/services.md) (3 operations)
-Windows service control (start/stop/restart) and monitoring.
-
-### [Site](./docs/sites.md) (5 operations)
-Full CRUD operations with client association and custom fields.
-
-### [Software](./docs/software.md) (6 operations)
-Software deployment, Chocolatey package management, installation and uninstallation.
-
-### [Task](./docs/tasks.md) (6 operations)
-Task scheduling and execution with multiple task types.
-
-### [User](./docs/users.md) (5 operations)
-User account management with password and profile fields.
-
-### [Windows Update](./docs/windows-updates.md) (3 operations)
-Update management with scanning and installation capabilities.
+Call any documented REST endpoint (method, path, query, body). Full path list: [`docs/api-catalog.md`](docs/api-catalog.md).
 
 ## Resources
 
-- [TacticalRMM API Documentation](https://docs.tacticalrmm.com/)
-- [n8n Documentation](https://docs.n8n.io)
+- [Tactical RMM API documentation](https://docs.tacticalrmm.com/)
+- [n8n documentation](https://docs.n8n.io)
 - [Repository](https://github.com/redanthrax/tacticalrmm-node)
 
 ## Compatibility
 
-- n8n Version 0.199.0+
-- TacticalRMM Version 0.15.2+
+- n8n 0.199.0+
+- Tactical RMM 0.15.2+ (OpenAPI spec version 1.4.0 in `docs/swagger.yaml`)
 
 ## License
 

@@ -1,37 +1,70 @@
-import {
-		ILoadOptionsFunctions,
-		INodePropertyOptions,
-		NodeOperationError,
-} from 'n8n-workflow';
-
+import { ILoadOptionsFunctions, INodePropertyOptions } from 'n8n-workflow';
+import { getResourcesForGroup } from '../resourceGroups';
 import { apiRequest } from '../transport';
 
-export async function getClients(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-		const endpoint = '/clients';
-		const responseData = await apiRequest.call(this, 'GET', endpoint, {});
+export const tacticalRmmLoadOptions = {
+	getResources: async function (
+		this: ILoadOptionsFunctions,
+	): Promise<INodePropertyOptions[]> {
+		const resourceGroup = this.getCurrentNodeParameter('resourceGroup') as string;
+		return getResourcesForGroup(resourceGroup);
+	},
 
-		if(responseData === undefined) {
-				throw new NodeOperationError(this.getNode(), 'No data returned');
+	getClients: async function (this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+		const responseData = await apiRequest.call(this, 'GET', '/clients/', {});
+
+		if (!Array.isArray(responseData)) {
+			return [];
 		}
 
 		const returnData: INodePropertyOptions[] = [];
-		for(const data of responseData) {
+		for (const data of responseData) {
+			if (data.id && data.name) {
 				returnData.push({
-						name: data.name,
-						value: data.id,
+					name: data.name as string,
+					value: data.id as string | number,
 				});
+			}
 		}
 
-		returnData.sort((a, b) => {
-				if(a.name < b.name) {
-						return -1;
-				}
-				if(a.name > b.name) {
-						return 1;
-				}
-				
-				return 0;
-		});
+		return returnData.sort((a, b) => String(a.name).localeCompare(String(b.name)));
+	},
 
-		return returnData;
-}
+	getCustomFields: async function (this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+		const resource = this.getCurrentNodeParameter('resource') as string;
+
+		const modelMapping: Record<string, string> = {
+			agent: 'agent',
+			client: 'client',
+			site: 'site',
+		};
+
+		const model = modelMapping[resource];
+		if (!model) {
+			return [];
+		}
+
+		try {
+			const responseData = await apiRequest.call(this, 'GET', '/core/customfields/', {}, { model });
+
+			if (!Array.isArray(responseData)) {
+				return [];
+			}
+
+			const returnData: INodePropertyOptions[] = [];
+			for (const field of responseData) {
+				if (field.id && field.name) {
+					returnData.push({
+						name: field.name as string,
+						value: field.name as string,
+						description: (field.type as string) || '',
+					});
+				}
+			}
+
+			return returnData.sort((a, b) => String(a.name).localeCompare(String(b.name)));
+		} catch {
+			return [];
+		}
+	},
+};

@@ -1,3 +1,6 @@
+import { RESOURCE_GROUP_OPTIONS } from './resourceGroups';
+import { loadOptions } from './methods';
+import * as customApi from './actions/customApi';
 import * as agent from './actions/agent';
 import * as alert from './actions/alert';
 import * as automation from './actions/automation';
@@ -20,13 +23,10 @@ import * as logs from './actions/logs';
 
 import {
 	IExecuteFunctions,
-	ILoadOptionsFunctions,
 	INodeExecutionData,
-	INodePropertyOptions,
 	INodeType,
 	INodeTypeDescription,
-	LoggerProxy as Logger,
-	NodeConnectionType,
+	NodeConnectionTypes,
 } from 'n8n-workflow';
 
 export class TacticalRmm implements INodeType {
@@ -37,13 +37,13 @@ export class TacticalRmm implements INodeType {
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Get data from the TacticalRMM API',
+		description: 'Get data from the Tactical RMM API',
 		documentationUrl: 'https://github.com/redanthrax/tacticalrmm-node',
 		defaults: {
 			name: 'Tactical RMM',
 		},
-		inputs: [NodeConnectionType.Main],
-		outputs: [NodeConnectionType.Main],
+		inputs: [NodeConnectionTypes.Main],
+		outputs: [NodeConnectionTypes.Main],
 		usableAsTool: true,
 		credentials: [
 			{
@@ -53,90 +53,27 @@ export class TacticalRmm implements INodeType {
 		],
 		properties: [
 			{
+				displayName: 'Resource Group',
+				name: 'resourceGroup',
+				type: 'options',
+				noDataExpression: true,
+				options: RESOURCE_GROUP_OPTIONS,
+				default: 'agents',
+				description: 'The API area to operate on',
+			},
+			{
 				displayName: 'Resource',
 				name: 'resource',
 				type: 'options',
 				noDataExpression: true,
-				options: [
-					{
-						name: 'Agent',
-						value: 'agent',
-					},
-					{
-						name: 'Alert',
-						value: 'alert',
-					},
-					{
-						name: 'Alert Template',
-						value: 'alertTemplate',
-					},
-					{
-						name: 'API Key',
-						value: 'apiKey',
-					},
-					{
-						name: 'Automation',
-						value: 'automation',
-					},
-					{
-						name: 'Check',
-						value: 'check',
-					},
-					{
-						name: 'Client',
-						value: 'client',
-					},
-					{
-						name: 'Core',
-						value: 'core',
-					},
-					{
-						name: 'Deployment',
-						value: 'deployment',
-					},
-					{
-						name: 'Log',
-						value: 'logs',
-					},
-					{
-						name: 'Reporting',
-						value: 'reporting',
-					},
-					{
-						name: 'Role',
-						value: 'role',
-					},
-					{
-						name: 'Script',
-						value: 'script',
-					},
-					{
-						name: 'Service',
-						value: 'service',
-					},
-					{
-						name: 'Site',
-						value: 'site',
-					},
-					{
-						name: 'Software',
-						value: 'software',
-					},
-					{
-						name: 'Task',
-						value: 'task',
-					},
-					{
-						name: 'User',
-						value: 'user',
-					},
-					{
-						name: 'Windows Update',
-						value: 'winupdate',
-					},
-				],
+				typeOptions: {
+					loadOptionsMethod: 'getResources',
+					loadOptionsDependsOn: ['resourceGroup'],
+				},
 				default: 'agent',
+				description: 'The resource within the selected group',
 			},
+			...customApi.description,
 			...agent.description,
 			...alert.description,
 			...automation.description,
@@ -160,81 +97,19 @@ export class TacticalRmm implements INodeType {
 	};
 
 	methods = {
-		loadOptions: {
-			getClients: async function(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-				Logger.debug('Loading clients for TacticalRMM node', { node: this.getNode().name });
-				const { apiRequest } = await import('./transport');
-				try {
-					const requestMethod = 'GET';
-					const endpoint = '/clients/';
-					const body = {};
-					const qs = {};
-
-					const responseData = await apiRequest.call(this, requestMethod, endpoint, body, qs);
-
-					const options: INodePropertyOptions[] = [];
-					if (Array.isArray(responseData)) {
-						for (const client of responseData) {
-							if (client.id && client.name) {
-								options.push({
-									name: client.name,
-									value: client.id.toString(),
-									description: client.name || '',
-								});
-							}
-						}
-					}
-					return options.sort((a, b) => a.name.localeCompare(b.name));
-				} catch (error) {
-					return [];
-				}
-			},
-			getCustomFields: async function(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-				Logger.debug('Loading custom fields for TacticalRMM node', { node: this.getNode().name });
-				const { apiRequest } = await import('./transport');
-				const resource = this.getCurrentNodeParameter('resource') as string;
-
-				const modelMapping: Record<string, string> = {
-					agent: 'agent',
-					client: 'client',
-					site: 'site',
-				};
-
-				const model = modelMapping[resource];
-				if (!model) {
-					return [];
-				}
-
-				try {
-					const requestMethod = 'GET';
-					const endpoint = '/core/customfields/';
-					const body = {};
-					const qs = { model };
-
-					const responseData = await apiRequest.call(this, requestMethod, endpoint, body, qs);
-
-					const options: INodePropertyOptions[] = [];
-					if (Array.isArray(responseData)) {
-						for (const field of responseData) {
-							if (field.id && field.name) {
-								options.push({
-									name: field.name,
-									value: field.name,
-									description: field.type || '',
-								});
-							}
-						}
-					}
-					return options.sort((a, b) => a.name.localeCompare(b.name));
-				} catch (error) {
-					return [];
-				}
-			},
-		},
+		loadOptions,
 	};
 
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		const { router } = await import('./actions/router');
-		return await router.call(this);
+		try {
+			const { router } = await import('./actions/router');
+			return await router.call(this);
+		} catch (error) {
+			if (this.continueOnFail()) {
+				return [this.helpers.returnJsonArray({ error: (error as Error).message })];
+			}
+			const { toNodeApiError } = await import('./errors');
+			throw toNodeApiError(this, error);
+		}
 	}
 }
