@@ -9,7 +9,7 @@ export async function getByClient(
 		index: number,
 ): Promise<INodeExecutionData[]> {
 	const requestMethod = 'GET';
-	const endpoint = '/agents';
+	const endpoint = '/agents/';
 	const body = {} as IDataObject;
 	const clientId = this.getNodeParameter('clientId', index) as number;
 	const returnAll = this.getNodeParameter('returnAll', index, false) as boolean;

@@ -14,7 +14,7 @@ export async function runScript(
 	const timeout = this.getNodeParameter('timeout', index, 300) as number;
 
 	const requestMethod = 'POST';
-	const endpoint = `/agents/${agentId}/runscript`;
+	const endpoint = `/agents/${agentId}/runscript/`;
 	
 	const body = {
 		script_id: scriptId,

@@ -23,7 +23,7 @@ export async function update(
 	const customFields = this.getNodeParameter('custom_fields', index, {}) as IDataObject;
 
 	const requestMethod = 'PUT';
-	const endpoint = `/agents/${agentId}`;
+	const endpoint = `/agents/${agentId}/`;
 	
 	const body = {
 		description: description || null,

@@ -12,7 +12,7 @@ export async function getTasks(
 	const returnAll = this.getNodeParameter('returnAll', index, false) as boolean;
 
 	const requestMethod = 'GET';
-	const endpoint = `/agents/${agentId}/tasks`;
+	const endpoint = `/agents/${agentId}/tasks/`;
 	const body = {} as IDataObject;
 	const qs: IDataObject = {};
 	

@@ -11,7 +11,7 @@ export async function shutdown(
 	const agentId = this.getNodeParameter('agentId', index) as string;
 
 	const requestMethod = 'POST';
-	const endpoint = `/agents/${agentId}/shutdown`;
+	const endpoint = `/agents/${agentId}/shutdown/`;
 	const body = {} as IDataObject;
 	const qs = {} as IDataObject;
 

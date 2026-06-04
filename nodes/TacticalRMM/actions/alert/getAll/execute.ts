@@ -16,7 +16,7 @@ export async function getAll(
 			qs.limit = limit;
 		}
 		const requestMethod = 'PATCH';
-		const endpoint = '/alerts';
+		const endpoint = '/alerts/';
 		const body = {
 				snoozedFilter: false,
 				resolvedFilter: false,

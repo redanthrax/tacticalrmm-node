@@ -13,7 +13,7 @@ export async function reboot(
 	const delay = this.getNodeParameter('delay', index, 0) as number;
 
 	const requestMethod = 'POST';
-	const endpoint = `/agents/${agentId}/reboot`;
+	const endpoint = `/agents/${agentId}/reboot/`;
 	
 	const body = {
 		force,

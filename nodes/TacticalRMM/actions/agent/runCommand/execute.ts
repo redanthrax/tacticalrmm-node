@@ -14,7 +14,7 @@ export async function runCommand(
 	const timeout = this.getNodeParameter('timeout', index, 300) as number;
 
 	const requestMethod = 'POST';
-	const endpoint = `/agents/${agentId}/cmd`;
+	const endpoint = `/agents/${agentId}/cmd/`;
 	
 	const body = {
 		command,

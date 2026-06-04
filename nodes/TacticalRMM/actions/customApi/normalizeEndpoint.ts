@@ -1,3 +1,5 @@
+import { ensureTrailingSlash } from '../../urlUtils';
+
 /**
  * Normalizes a Tactical RMM API path for transport.apiRequest.
  * Accepts /agents/ or agents/.
@@ -20,5 +22,5 @@ export function normalizeEndpoint(raw: string): string {
 		path = `/${path}`;
 	}
 
-	return path;
+	return ensureTrailingSlash(path);
 }

@@ -39,7 +39,7 @@ export async function getAll(
 	}
 	
 	const requestMethod = 'GET';
-	const endpoint = '/agents';
+	const endpoint = '/agents/';
 	const body = {} as IDataObject;
 
 	let responseData;

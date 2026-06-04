@@ -11,7 +11,7 @@ export async function getById(
 		const clientId = this.getNodeParameter('clientId', index) as string;
 		const qs = {} as IDataObject;
 		const requestMethod = 'GET';
-		const endpoint = `/clients/${clientId}`;
+		const endpoint = `/clients/${clientId}/`;
 		const body = {} as IDataObject;
 
 		let responseData;

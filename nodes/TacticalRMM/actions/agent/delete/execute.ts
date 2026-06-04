@@ -11,7 +11,7 @@ export async function deleteAgent(
 	const agentId = this.getNodeParameter('agentId', index) as string;
 
 	const requestMethod = 'DELETE';
-	const endpoint = `/agents/${agentId}`;
+	const endpoint = `/agents/${agentId}/`;
 	const body = {} as IDataObject;
 	const qs = {} as IDataObject;
 

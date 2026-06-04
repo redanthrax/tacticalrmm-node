@@ -12,7 +12,7 @@ export async function getChecks(
 	const returnAll = this.getNodeParameter('returnAll', index, false) as boolean;
 
 	const requestMethod = 'GET';
-	const endpoint = `/agents/${agentId}/checks`;
+	const endpoint = `/agents/${agentId}/checks/`;
 	const body = {} as IDataObject;
 	const qs: IDataObject = {};
 	

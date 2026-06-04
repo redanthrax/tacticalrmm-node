@@ -16,7 +16,7 @@ export async function getAll(
 			qs.limit = limit;
 		}
 		const requestMethod = 'GET';
-		const endpoint = '/clients';
+		const endpoint = '/clients/';
 		const body = {} as IDataObject;
 
 		let responseData;

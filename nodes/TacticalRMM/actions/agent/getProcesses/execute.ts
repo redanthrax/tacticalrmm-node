@@ -12,7 +12,7 @@ export async function getProcesses(
 	const returnAll = this.getNodeParameter('returnAll', index, false) as boolean;
 
 	const requestMethod = 'GET';
-	const endpoint = `/agents/${agentId}/processes`;
+	const endpoint = `/agents/${agentId}/processes/`;
 	const body = {} as IDataObject;
 	const qs: IDataObject = {};
 	
