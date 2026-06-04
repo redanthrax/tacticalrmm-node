@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Tactical RMM API
-  version: 1.3.1
+  version: 1.4.0
   description: Simple and Fast remote monitoring and management tool
 paths:
   /:
@@ -841,6 +841,142 @@ paths:
   /agents/{agent_id}/recover/:
     post:
       operationId: agents_recover_create
+      parameters:
+      - in: path
+        name: agent_id
+        schema:
+          type: string
+          pattern: ^[^/]{20}[^/]+$
+        required: true
+      tags:
+      - agents
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
+  /agents/{agent_id}/registry/:
+    get:
+      operationId: agents_registry_retrieve
+      parameters:
+      - in: path
+        name: agent_id
+        schema:
+          type: string
+          pattern: ^[^/]{20}[^/]+$
+        required: true
+      tags:
+      - agents
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
+  /agents/{agent_id}/registry/create-key/:
+    post:
+      operationId: agents_registry_create_key_create
+      parameters:
+      - in: path
+        name: agent_id
+        schema:
+          type: string
+          pattern: ^[^/]{20}[^/]+$
+        required: true
+      tags:
+      - agents
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
+  /agents/{agent_id}/registry/create-value/:
+    post:
+      operationId: agents_registry_create_value_create
+      parameters:
+      - in: path
+        name: agent_id
+        schema:
+          type: string
+          pattern: ^[^/]{20}[^/]+$
+        required: true
+      tags:
+      - agents
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
+  /agents/{agent_id}/registry/delete-key/:
+    delete:
+      operationId: agents_registry_delete_key_destroy
+      parameters:
+      - in: path
+        name: agent_id
+        schema:
+          type: string
+          pattern: ^[^/]{20}[^/]+$
+        required: true
+      tags:
+      - agents
+      security:
+      - API Key Auth: []
+      responses:
+        '204':
+          description: No response body
+  /agents/{agent_id}/registry/delete-value/:
+    delete:
+      operationId: agents_registry_delete_value_destroy
+      parameters:
+      - in: path
+        name: agent_id
+        schema:
+          type: string
+          pattern: ^[^/]{20}[^/]+$
+        required: true
+      tags:
+      - agents
+      security:
+      - API Key Auth: []
+      responses:
+        '204':
+          description: No response body
+  /agents/{agent_id}/registry/modify-value/:
+    post:
+      operationId: agents_registry_modify_value_create
+      parameters:
+      - in: path
+        name: agent_id
+        schema:
+          type: string
+          pattern: ^[^/]{20}[^/]+$
+        required: true
+      tags:
+      - agents
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
+  /agents/{agent_id}/registry/rename-key/:
+    post:
+      operationId: agents_registry_rename_key_create
+      parameters:
+      - in: path
+        name: agent_id
+        schema:
+          type: string
+          pattern: ^[^/]{20}[^/]+$
+        required: true
+      tags:
+      - agents
+      security:
+      - API Key Auth: []
+      responses:
+        '200':
+          description: No response body
+  /agents/{agent_id}/registry/rename-value/:
+    post:
+      operationId: agents_registry_rename_value_create
       parameters:
       - in: path
         name: agent_id

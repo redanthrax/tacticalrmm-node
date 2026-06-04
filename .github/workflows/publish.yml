@@ -1,0 +1,71 @@
+# Publishes to npm with provenance (required for n8n community verification).
+#
+# One-time npm setup:
+# 1. https://www.npmjs.com/package/@redanthrax/n8n-nodes-tacticalrmm → Settings
+# 2. Publish access → Trusted Publishers → Add GitHub Actions publisher:
+#    - Owner: redanthrax
+#    - Repository: tacticalrmm-node
+#    - Workflow filename: publish.yml
+#
+# Release: bump version in package.json, commit, push tag (e.g. 1.3.0), this workflow runs.
+
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*.*.*'
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.19.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24.x'
+          cache: pnpm
+
+      - name: Upgrade npm (OIDC trusted publishing requires npm 11.5.1+)
+        run: npm install -g npm@11
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Supply chain check
+        run: pnpm run audit:supply-chain
+
+      - name: pnpm audit (high severity and above)
+        run: pnpm audit --audit-level=high
+
+      - name: OSV vulnerability scan (lockfile)
+        uses: google/osv-scanner-action/osv-scanner-action@v2.3.3
+        with:
+          scan-args: |-
+            --lockfile=pnpm-lock.yaml
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Lint (prepublish rules)
+        run: pnpm exec eslint -c eslint.config.prepublish.mjs nodes credentials package.json
+
+      - name: Publish to npm
+        run: |
+          npm --version
+          npm publish --provenance --access public
