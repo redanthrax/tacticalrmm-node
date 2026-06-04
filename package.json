@@ -1,9 +1,10 @@
 {
-  "name": "@redanthrax/n8n-nodes-tacticalrmm",
+  "name": "n8n-nodes-tacticalrmm",
   "version": "1.3.2",
   "description": "An n8n node to connect to the Tactical RMM API",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "tacticalrmm"
   ],
   "license": "MIT",
   "homepage": "https://github.com/redanthrax/tacticalrmm-node#readme",
