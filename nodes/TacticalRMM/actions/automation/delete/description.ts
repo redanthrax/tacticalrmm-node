@@ -8,7 +8,7 @@ export const automationDeleteDescription: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['automation'],
-				operation: ['delete'],
+				operation: ['deleteAutomation'],
 			},
 		},
 		required: true,

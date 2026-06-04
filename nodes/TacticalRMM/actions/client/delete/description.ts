@@ -8,7 +8,7 @@ export const deleteDescription: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['client'],
-				operation: ['delete'],
+				operation: ['deleteClient'],
 			},
 		},
 		required: true,

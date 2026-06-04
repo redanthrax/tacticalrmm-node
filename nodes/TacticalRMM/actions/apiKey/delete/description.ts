@@ -9,7 +9,7 @@ export const apiKeyDeleteDescription: ApiKeyProperties = [
 		displayOptions: {
 			show: {
 				resource: ['apiKey'],
-				operation: ['delete'],
+				operation: ['deleteApiKey'],
 			},
 		},
 		default: '',

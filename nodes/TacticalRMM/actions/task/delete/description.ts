@@ -8,7 +8,7 @@ export const taskDeleteDescription: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['task'],
-				operation: ['delete'],
+				operation: ['deleteTask'],
 			},
 		},
 		required: true,

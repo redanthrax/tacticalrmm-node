@@ -6,26 +6,27 @@ type TacticalRMMMap = {
 		'addNote' | 'getEventLog' | 'getHistory' | 'bulkAction' | 'wakeOnLan' | 'recover' |
 		'getPendingActions' | 'deletePendingActions' | 'getScriptHistory' | 'getVersions' |
 		'bulkRecovery' | 'bulkMaintenanceMode' | 'bulkUpdate';
-	alert: 'getAll' | 'getById' | 'update' | 'delete';
-	automation: 'getAll' | 'getById' | 'create' | 'update' | 'delete';
-	check: 'getAll' | 'getById' | 'create' | 'update' | 'delete' | 'reset' | 'run';
-	client: 'getAll' | 'getById' | 'create' | 'update' | 'delete';
-	script: 'getAll' | 'getById' | 'create' | 'update' | 'delete' | 'download' | 'test' |
+	alert: 'getAll' | 'getById' | 'update' | 'deleteAlert';
+	automation: 'getAll' | 'getById' | 'create' | 'update' | 'deleteAutomation';
+	check: 'getAll' | 'getById' | 'create' | 'update' | 'deleteCheck' | 'reset' | 'run';
+	client: 'getAll' | 'getById' | 'create' | 'update' | 'deleteClient';
+	script: 'getAll' | 'getById' | 'create' | 'update' | 'deleteScript' | 'download' | 'test' |
 		'getSnippets' | 'getSnippetById' | 'createSnippet' | 'updateSnippet' | 'deleteSnippet';
 	service: 'getMany' | 'getByName' | 'control';
-	site: 'getAll' | 'getById' | 'create' | 'update' | 'delete';
-	task: 'getAll' | 'getById' | 'create' | 'update' | 'delete' | 'run';
+	site: 'getAll' | 'getById' | 'create' | 'update' | 'deleteSite';
+	task: 'getAll' | 'getById' | 'create' | 'update' | 'deleteTask' | 'run';
 	software: 'getByAgent' | 'getAll' | 'getChocos' | 'install' | 'uninstall' | 'installGlobally';
 	winupdate: 'getMany' | 'scan' | 'install';
-	alertTemplate: 'getAll' | 'getById' | 'create' | 'update' | 'delete';
-	apiKey: 'getAll' | 'create' | 'update' | 'delete';
+	alertTemplate: 'getAll' | 'getById' | 'create' | 'update' | 'deleteTemplate';
+	apiKey: 'getAll' | 'create' | 'update' | 'deleteApiKey';
 	core: 'getDashInfo' | 'getVersion' | 'clearCache' | 'testEmail' | 'testSms';
-	deployment: 'getAll' | 'getById' | 'create' | 'delete' | 'generate';
-	role: 'getAll' | 'getById' | 'create' | 'update' | 'delete';
-	user: 'getAll' | 'getById' | 'create' | 'update' | 'delete';
-	reporting: 'getAll' | 'getById' | 'create' | 'update' | 'delete' | 'run' | 'email' | 'export';
+	deployment: 'getAll' | 'getById' | 'create' | 'deleteDeployment' | 'generate';
+	role: 'getAll' | 'getById' | 'create' | 'update' | 'deleteRole';
+	user: 'getAll' | 'getById' | 'create' | 'update' | 'deleteUser';
+	reporting: 'getAll' | 'getById' | 'create' | 'update' | 'deleteReport' | 'run' | 'email' | 'exportReport';
 	logs: 'getPendingActions' | 'deleteAllPendingActions' | 'getPendingActionById' |
 		'deletePendingActionById' | 'updateAuditSettings' | 'updateDebugSettings';
+	customApi: 'request';
 };
 
 export type TacticalRMM = AllEntities<TacticalRMMMap>;
@@ -49,6 +50,7 @@ export type TacticalRMMRole = Entity<TacticalRMMMap, 'role'>;
 export type TacticalRMMUser = Entity<TacticalRMMMap, 'user'>;
 export type TacticalRMMReporting = Entity<TacticalRMMMap, 'reporting'>;
 export type TacticalRMMLogs = Entity<TacticalRMMMap, 'logs'>;
+export type TacticalRMMCustomApi = Entity<TacticalRMMMap, 'customApi'>;
 
 export type AgentProperties = PropertiesOf<TacticalRMMAgent>;
 export type AlertProperties = PropertiesOf<TacticalRMMAlert>;
@@ -69,3 +71,4 @@ export type RoleProperties = PropertiesOf<TacticalRMMRole>;
 export type UserProperties = PropertiesOf<TacticalRMMUser>;
 export type ReportingProperties = PropertiesOf<TacticalRMMReporting>;
 export type LogsProperties = PropertiesOf<TacticalRMMLogs>;
+export type CustomApiProperties = PropertiesOf<TacticalRMMCustomApi>;

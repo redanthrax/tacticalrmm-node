@@ -8,7 +8,7 @@ export const deleteDescription: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['site'],
-				operation: ['delete'],
+				operation: ['deleteSite'],
 			},
 		},
 		required: true,

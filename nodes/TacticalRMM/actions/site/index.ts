@@ -6,7 +6,7 @@ import * as deleteSite from './delete';
 
 import { INodeProperties } from 'n8n-workflow';
 
-export { getAll, getById, create, update, deleteSite as delete };
+export { getAll, getById, create, update, deleteSite };
 
 export const description: INodeProperties[] = [
 	{
@@ -28,7 +28,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Delete',
-				value: 'delete',
+				value: 'deleteSite',
 				description: 'Delete a site',
 				action: 'Delete a site',
 			},

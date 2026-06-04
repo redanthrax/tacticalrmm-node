@@ -31,7 +31,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Delete',
-				value: 'delete',
+				value: 'deleteReport',
 				description: 'Delete a report template',
 				action: 'Delete report template',
 			},
@@ -43,7 +43,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Export',
-				value: 'export',
+				value: 'exportReport',
 				description: 'Export a report',
 				action: 'Export report',
 			},

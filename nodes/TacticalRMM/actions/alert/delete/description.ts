@@ -8,7 +8,7 @@ export const alertDeleteDescription: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['alert'],
-				operation: ['delete'],
+				operation: ['deleteAlert'],
 			},
 		},
 		required: true,

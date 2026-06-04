@@ -1,11 +1,7 @@
-import { IExecuteFunctions } from 'n8n-workflow';
-
-import {
-	IDataObject,
-	INodeExecutionData,
-} from 'n8n-workflow';
+import { IExecuteFunctions, IDataObject, INodeExecutionData } from 'n8n-workflow';
 
 import { TacticalRMM } from './Interfaces';
+import { toNodeApiError } from '../errors';
 
 export async function router(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 	const items = this.getInputData();
@@ -37,51 +33,54 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
 				case 'client':
 					resourceModule = await import('./client');
 					break;
-			case 'check':
-				resourceModule = await import('./check');
-				break;
-			case 'script':
-				resourceModule = await import('./script');
-				break;
-			case 'service':
-				resourceModule = await import('./service');
-				break;
-			case 'site':
-				resourceModule = await import('./site');
-				break;
-			case 'task':
-				resourceModule = await import('./task');
-				break;
-			case 'software':
-				resourceModule = await import('./software');
-				break;
-			case 'winupdate':
-				resourceModule = await import('./winupdate');
-				break;
-			case 'alertTemplate':
-				resourceModule = await import('./alertTemplate');
-				break;
-			case 'apiKey':
-				resourceModule = await import('./apiKey');
-				break;
-			case 'core':
-				resourceModule = await import('./core');
-				break;
-			case 'deployment':
-				resourceModule = await import('./deployment');
-				break;
-			case 'role':
-				resourceModule = await import('./role');
-				break;
-			case 'user':
-				resourceModule = await import('./user');
-				break;
-			case 'reporting':
-				resourceModule = await import('./reporting');
-				break;
-			case 'logs':
-				resourceModule = await import('./logs');
-				break;
+				case 'check':
+					resourceModule = await import('./check');
+					break;
+				case 'script':
+					resourceModule = await import('./script');
+					break;
+				case 'service':
+					resourceModule = await import('./service');
+					break;
+				case 'site':
+					resourceModule = await import('./site');
+					break;
+				case 'task':
+					resourceModule = await import('./task');
+					break;
+				case 'software':
+					resourceModule = await import('./software');
+					break;
+				case 'winupdate':
+					resourceModule = await import('./winupdate');
+					break;
+				case 'alertTemplate':
+					resourceModule = await import('./alertTemplate');
+					break;
+				case 'apiKey':
+					resourceModule = await import('./apiKey');
+					break;
+				case 'core':
+					resourceModule = await import('./core');
+					break;
+				case 'deployment':
+					resourceModule = await import('./deployment');
+					break;
+				case 'role':
+					resourceModule = await import('./role');
+					break;
+				case 'user':
+					resourceModule = await import('./user');
+					break;
+				case 'reporting':
+					resourceModule = await import('./reporting');
+					break;
+				case 'logs':
+					resourceModule = await import('./logs');
+					break;
+				case 'customApi':
+					resourceModule = await import('./customApi');
+					break;
 				default:
 					break;
 			}
@@ -90,14 +89,20 @@ export async function router(this: IExecuteFunctions): Promise<INodeExecutionDat
 				responseData = await (resourceModule as any)[tacticalrmm.operation].execute.call(this, i);
 			}
 
-			const executionData = this.helpers.returnJsonArray(responseData);
+			const executionData = this.helpers.constructExecutionMetaData(
+				this.helpers.returnJsonArray(responseData),
+				{ itemData: { item: i } },
+			);
 			operationResult.push(...executionData);
 		} catch (err) {
 			if (this.continueOnFail()) {
-				operationResult.push({ json: this.getInputData(i)[0].json, error: err });
+				operationResult.push({
+					json: this.getInputData(i)[0].json,
+					error: err,
+					pairedItem: { item: i },
+				});
 			} else {
-				if (err.context) err.context.itemIndex = i;
-				throw err;
+				throw toNodeApiError(this, err, { itemIndex: i });
 			}
 		}
 	}

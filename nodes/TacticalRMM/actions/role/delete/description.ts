@@ -9,7 +9,7 @@ export const roleDeleteDescription: RoleProperties = [
 		displayOptions: {
 			show: {
 				resource: ['role'],
-				operation: ['delete'],
+				operation: ['deleteRole'],
 			},
 		},
 		default: '',

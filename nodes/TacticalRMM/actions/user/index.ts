@@ -28,7 +28,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Delete',
-				value: 'delete',
+				value: 'deleteUser',
 				description: 'Delete a user',
 				action: 'Delete user',
 			},

@@ -6,7 +6,7 @@ import * as update from './update';
 
 import { INodeProperties } from 'n8n-workflow';
 
-export { create, deleteRole as delete, getAll, getById, update };
+export { create, deleteRole, getAll, getById, update };
 
 export const description: INodeProperties[] = [
 	{
@@ -28,7 +28,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Delete',
-				value: 'delete',
+				value: 'deleteRole',
 				description: 'Delete a role',
 				action: 'Delete role',
 			},

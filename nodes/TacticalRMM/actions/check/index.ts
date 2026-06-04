@@ -8,7 +8,7 @@ import * as run from './run';
 
 import { INodeProperties } from 'n8n-workflow';
 
-export { getAll, getById, create, update, deleteCheck as delete, reset, run };
+export { getAll, getById, create, update, deleteCheck, reset, run };
 
 export const description: INodeProperties[] = [
 	{
@@ -30,7 +30,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Delete',
-				value: 'delete',
+				value: 'deleteCheck',
 				description: 'Delete a check',
 				action: 'Delete a check',
 			},

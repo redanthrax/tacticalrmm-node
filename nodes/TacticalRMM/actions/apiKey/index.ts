@@ -5,7 +5,7 @@ import * as update from './update';
 
 import { INodeProperties } from 'n8n-workflow';
 
-export { create, deleteApiKey as delete, getAll, update };
+export { create, deleteApiKey, getAll, update };
 
 export const description: INodeProperties[] = [
 	{
@@ -27,7 +27,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Delete',
-				value: 'delete',
+				value: 'deleteApiKey',
 				description: 'Delete an API key',
 				action: 'Delete API key',
 			},

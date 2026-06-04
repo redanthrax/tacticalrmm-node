@@ -1,0 +1,18 @@
+{
+	"node": "@redanthrax/n8n-nodes-tacticalrmm.tacticalRmm",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Miscellaneous"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://github.com/redanthrax/tacticalrmm-node#setup"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/redanthrax/tacticalrmm-node"
+			}
+		]
+	}
+}

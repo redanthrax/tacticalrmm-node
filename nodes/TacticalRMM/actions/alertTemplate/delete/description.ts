@@ -9,7 +9,7 @@ export const alertTemplateDeleteDescription: AlertTemplateProperties = [
 		displayOptions: {
 			show: {
 				resource: ['alertTemplate'],
-				operation: ['delete'],
+				operation: ['deleteTemplate'],
 			},
 		},
 		default: '',

@@ -28,7 +28,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Delete',
-				value: 'delete',
+				value: 'deleteTemplate',
 				description: 'Delete an alert template',
 				action: 'Delete alert template',
 			},

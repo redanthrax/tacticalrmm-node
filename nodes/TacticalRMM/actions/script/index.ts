@@ -18,7 +18,7 @@ export {
 	getById,
 	create,
 	update,
-	deleteScript as delete,
+	deleteScript,
 	download,
 	test,
 	getSnippets,
@@ -54,7 +54,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Delete',
-				value: 'delete',
+				value: 'deleteScript',
 				description: 'Delete a script',
 				action: 'Delete a script',
 			},

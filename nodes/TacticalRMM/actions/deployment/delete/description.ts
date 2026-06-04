@@ -9,7 +9,7 @@ export const deploymentDeleteDescription: DeploymentProperties = [
 		displayOptions: {
 			show: {
 				resource: ['deployment'],
-				operation: ['delete'],
+				operation: ['deleteDeployment'],
 			},
 		},
 		default: '',

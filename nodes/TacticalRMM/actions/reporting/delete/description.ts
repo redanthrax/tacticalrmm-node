@@ -9,7 +9,7 @@ export const reportingDeleteDescription: ReportingProperties = [
 		displayOptions: {
 			show: {
 				resource: ['reporting'],
-				operation: ['delete'],
+				operation: ['deleteReport'],
 			},
 		},
 		default: '',

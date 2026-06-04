@@ -8,7 +8,7 @@ export const checkDeleteDescription: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['check'],
-				operation: ['delete'],
+				operation: ['deleteCheck'],
 			},
 		},
 		required: true,

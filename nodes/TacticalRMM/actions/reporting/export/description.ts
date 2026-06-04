@@ -9,7 +9,7 @@ export const description: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['reporting'],
-				operation: ['export'],
+				operation: ['exportReport'],
 			},
 		},
 		default: '',
@@ -23,7 +23,7 @@ export const description: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['reporting'],
-				operation: ['export'],
+				operation: ['exportReport'],
 			},
 		},
 		options: [

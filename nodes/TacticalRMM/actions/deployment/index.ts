@@ -28,7 +28,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Delete',
-				value: 'delete',
+				value: 'deleteDeployment',
 				description: 'Delete a deployment',
 				action: 'Delete deployment',
 			},

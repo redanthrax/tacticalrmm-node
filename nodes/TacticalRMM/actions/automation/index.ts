@@ -6,7 +6,7 @@ import * as deleteAutomation from './delete';
 
 import { INodeProperties } from 'n8n-workflow';
 
-export { getAll, getById, create, update, deleteAutomation as delete };
+export { getAll, getById, create, update, deleteAutomation };
 
 export const description: INodeProperties[] = [
 	{
@@ -28,7 +28,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Delete',
-				value: 'delete',
+				value: 'deleteAutomation',
 				description: 'Delete an automation policy',
 				action: 'Delete an automation policy',
 			},

@@ -8,7 +8,7 @@ export const scriptDeleteDescription: INodeProperties[] = [
 		displayOptions: {
 			show: {
 				resource: ['script'],
-				operation: ['delete'],
+				operation: ['deleteScript'],
 			},
 		},
 		required: true,

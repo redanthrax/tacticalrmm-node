@@ -18,14 +18,13 @@ export async function apiRequest(
 	const creds = await this.getCredentials('tacticalRMMApi');
 
 	const options: IHttpRequestOptions = {
-			method,
-			body,
-			qs,
-			url: `${creds.baseUrl}${endpoint}`,
-			headers: {
-					'content-type': 'application/json',
-					'X-API-KEY': `${creds.apiKey}`,
-			},
+		method,
+		body,
+		qs,
+		url: `${creds.baseUrl}${endpoint}`,
+		headers: {
+			'content-type': 'application/json',
+		},
 	};
 
 	return this.helpers.httpRequestWithAuthentication.call(this, 'tacticalRMMApi', options);

@@ -9,7 +9,7 @@ export const userDeleteDescription: UserProperties = [
 		displayOptions: {
 			show: {
 				resource: ['user'],
-				operation: ['delete'],
+				operation: ['deleteUser'],
 			},
 		},
 		default: '',

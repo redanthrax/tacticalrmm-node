@@ -5,7 +5,7 @@ import * as deleteAlert from './delete';
 
 import { INodeProperties } from 'n8n-workflow';
 
-export { getAll, getById, update, deleteAlert as delete };
+export { getAll, getById, update, deleteAlert };
 
 export const description: INodeProperties[] = [
 		{
@@ -21,7 +21,7 @@ export const description: INodeProperties[] = [
 				options: [
 						{
 								name: 'Delete',
-								value: 'delete',
+								value: 'deleteAlert',
 								description: 'Delete an alert',
 								action: 'Delete an alert',
 						},

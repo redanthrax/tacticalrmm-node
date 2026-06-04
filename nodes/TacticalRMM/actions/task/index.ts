@@ -7,7 +7,7 @@ import * as run from './run';
 
 import { INodeProperties } from 'n8n-workflow';
 
-export { getAll, getById, create, update, deleteTask as delete, run };
+export { getAll, getById, create, update, deleteTask, run };
 
 export const description: INodeProperties[] = [
 	{
@@ -29,7 +29,7 @@ export const description: INodeProperties[] = [
 			},
 			{
 				name: 'Delete',
-				value: 'delete',
+				value: 'deleteTask',
 				description: 'Delete a task',
 				action: 'Delete a task',
 			},
