@@ -25,6 +25,10 @@
     "node": ">=22.22.3",
     "pnpm": ">=10.19.0"
   },
+  "volta": {
+    "node": "22.22.3",
+    "pnpm": "10.19.0"
+  },
   "main": "index.js",
   "scripts": {
     "audit:supply-chain": "node scripts/check-supply-chain.mjs",
