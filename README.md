@@ -9,7 +9,7 @@ Tactical RMM is a remote monitoring and management tool, built with Django and V
 This repo uses **pnpm** with a committed lockfile and supply-chain controls in [`pnpm-workspace.yaml`](pnpm-workspace.yaml) (see [SECURITY.md](SECURITY.md)). After clone:
 
 ```bash
-corepack enable && corepack prepare pnpm@10.19.0 --activate
+corepack enable && corepack prepare pnpm@11.14.0 --activate
 pnpm install --frozen-lockfile
 pnpm run audit:supply-chain
 pnpm run build

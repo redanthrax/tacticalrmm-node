@@ -20,14 +20,14 @@
     "access": "public",
     "provenance": true
   },
-  "packageManager": "pnpm@10.19.0",
+  "packageManager": "pnpm@11.14.0",
   "engines": {
     "node": ">=22.22.3",
-    "pnpm": ">=10.19.0"
+    "pnpm": ">=11.14.0"
   },
   "volta": {
     "node": "22.22.3",
-    "pnpm": "10.19.0"
+    "pnpm": "11.14.0"
   },
   "main": "index.js",
   "scripts": {
