@@ -14,5 +14,10 @@ updates:
     commit-message:
       prefix: chore
       include: scope
+    # typescript-eslint has no TS 7 programmatic API yet (lands in 7.1).
+    # Keep typescript on 6.x so lint does not crash on ts.Extension.Cjs.
+    ignore:
+      - dependency-name: typescript
+        versions: ['>=7.0.0']
     # All Dependabot PRs must pass the "Supply chain security" workflow before merge
     # (enable required status checks on master in GitHub branch protection).
