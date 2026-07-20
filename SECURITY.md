@@ -9,7 +9,7 @@ This repository uses defenses against npm supply-chain worms such as **Mini Shai
 - **pnpm only** — `packageManager`, `engines.pnpm`, and `pnpm-lock.yaml` enforce a single package manager. Enable Corepack so `npm install` / `yarn install` are rejected in this repo (see below). We do **not** use a `preinstall` script: that would run when end users install the published node via npm in n8n.
 - **Frozen lockfile** — `pnpm-lock.yaml` is committed; CI uses `pnpm install --frozen-lockfile`.
 - **pnpm workspace config** — supply-chain settings live in `pnpm-workspace.yaml` (pnpm 10+ ignores `package.json` → `pnpm`).
-- **Blocked install scripts** — only packages in `pnpm-workspace.yaml` → `onlyBuiltDependencies` may run lifecycle scripts (currently `isolated-vm` for dev tooling). `strictDepBuilds: true` fails on unreviewed scripts.
+- **Blocked install scripts** — only packages with `allowBuilds: true` in `pnpm-workspace.yaml` may run lifecycle scripts (currently `isolated-vm` for dev tooling). `strictDepBuilds: true` fails on unreviewed scripts.
 - **Blocklist scan** — `pnpm run audit:supply-chain` checks the lockfile against `security/compromised-packages.json` and validates pnpm config.
 - **Delayed updates** — `minimumReleaseAge` (24h, strict) reduces exposure to freshly published malicious versions.
 - **No exotic transitive deps** — `blockExoticSubdeps` blocks git/tarball transitive resolutions.
@@ -21,7 +21,7 @@ This repository uses defenses against npm supply-chain worms such as **Mini Shai
 
    ```bash
    corepack enable
-   corepack prepare pnpm@10.19.0 --activate
+   corepack prepare pnpm@11.14.0 --activate
    pnpm install --frozen-lockfile
    ```
 

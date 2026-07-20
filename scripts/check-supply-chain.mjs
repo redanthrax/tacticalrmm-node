@@ -20,7 +20,7 @@ const REQUIRED_WORKSPACE_SETTINGS = [
 	'minimumReleaseAgeStrict:',
 	'blockExoticSubdeps:',
 	'strictDepBuilds:',
-	'onlyBuiltDependencies:',
+	'allowBuilds:',
 	'overrides:',
 ];
 
@@ -45,7 +45,7 @@ function verifyPnpmOnlyRepository() {
 		const pkg = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
 		const pm = pkg.packageManager ?? '';
 		if (!pm.startsWith('pnpm@')) {
-			errors.push('package.json "packageManager" must pin pnpm (e.g. pnpm@10.19.0)');
+			errors.push('package.json "packageManager" must pin pnpm (e.g. pnpm@11.14.0)');
 		}
 		if (!pkg.engines?.pnpm) {
 			errors.push('package.json engines.pnpm is required — rejects installs with wrong package manager');
@@ -96,27 +96,38 @@ function verifyActivePnpmConfig() {
 	const errors = [];
 
 	try {
-		const config = execSync('pnpm config list', {
+		const raw = execSync('pnpm config list', {
 			cwd: root,
 			encoding: 'utf8',
 			stdio: ['ignore', 'pipe', 'pipe'],
 		});
 
-		const required = [
-			['minimum-release-age=1440', 'minimumReleaseAge (24h delay) is not active'],
-			['minimum-release-age-strict=true', 'minimumReleaseAgeStrict is not active'],
-			['block-exotic-subdeps=true', 'blockExoticSubdeps is not active'],
-			['strict-dep-builds=true', 'strictDepBuilds is not active'],
-			['only-built-dependencies[]=isolated-vm', 'onlyBuiltDependencies allowlist missing isolated-vm'],
-		];
-
-		for (const [needle, message] of required) {
-			if (!config.includes(needle)) {
-				errors.push(message);
-			}
+		let config;
+		try {
+			config = JSON.parse(raw);
+		} catch {
+			errors.push('pnpm config list did not return JSON — expected pnpm 11+');
+			return errors;
 		}
 
-		if (!config.includes('lodash=') || !config.includes('uuid=')) {
+		if (config.minimumReleaseAge !== 1440) {
+			errors.push('minimumReleaseAge (24h delay) is not active');
+		}
+		if (config.minimumReleaseAgeStrict !== true) {
+			errors.push('minimumReleaseAgeStrict is not active');
+		}
+		if (config.blockExoticSubdeps !== true) {
+			errors.push('blockExoticSubdeps is not active');
+		}
+		if (config.strictDepBuilds !== true) {
+			errors.push('strictDepBuilds is not active');
+		}
+		if (config.allowBuilds?.['isolated-vm'] !== true) {
+			errors.push('allowBuilds allowlist missing isolated-vm');
+		}
+
+		const overrides = config.overrides ?? {};
+		if (!overrides.lodash || !overrides.uuid) {
 			errors.push('pnpm overrides for lodash/uuid are not active — check pnpm-workspace.yaml');
 		}
 	} catch (error) {
