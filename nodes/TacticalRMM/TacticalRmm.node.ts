@@ -33,7 +33,10 @@ export class TacticalRmm implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Tactical RMM',
 		name: 'tacticalRmm',
-		icon: 'file:trmm.svg',
+		icon: {
+			light: 'file:trmm.svg',
+			dark: 'file:trmm.dark.svg',
+		},
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
@@ -62,7 +65,7 @@ export class TacticalRmm implements INodeType {
 				description: 'The API area to operate on',
 			},
 			{
-				displayName: 'Resource',
+				displayName: 'Resource Name or ID',
 				name: 'resource',
 				type: 'options',
 				noDataExpression: true,
@@ -71,7 +74,8 @@ export class TacticalRmm implements INodeType {
 					loadOptionsDependsOn: ['resourceGroup'],
 				},
 				default: 'agent',
-				description: 'The resource within the selected group',
+				description:
+					'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 			},
 			...customApi.description,
 			...agent.description,

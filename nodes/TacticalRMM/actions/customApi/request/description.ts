@@ -6,11 +6,11 @@ export const requestDescription: INodeProperties[] = [
 		name: 'method',
 		type: 'options',
 		options: [
+			{ name: 'DELETE', value: 'DELETE' },
 			{ name: 'GET', value: 'GET' },
+			{ name: 'PATCH', value: 'PATCH' },
 			{ name: 'POST', value: 'POST' },
 			{ name: 'PUT', value: 'PUT' },
-			{ name: 'PATCH', value: 'PATCH' },
-			{ name: 'DELETE', value: 'DELETE' },
 		],
 		default: 'GET',
 		required: true,
