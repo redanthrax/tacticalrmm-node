@@ -70,7 +70,7 @@ export async function execute(
 
 	let endpoint: string;
 	try {
-		endpoint = normalizeEndpoint(endpointRaw);
+		endpoint = normalizeEndpoint(endpointRaw, this.getNode());
 	} catch (error) {
 		throw new NodeOperationError(
 			this.getNode(),
