@@ -32,7 +32,7 @@
   "main": "index.js",
   "scripts": {
     "audit:supply-chain": "node scripts/check-supply-chain.mjs",
-    "build": "pnpm exec rimraf dist && pnpm exec tsc && pnpm exec gulp build:icons",
+    "build": "pnpm exec rimraf dist && pnpm exec tsc && node scripts/copy-icons.mjs",
     "dev": "pnpm exec tsc --watch",
     "format": "pnpm exec prettier nodes credentials --write",
     "generate": "python3 scripts/generate-api-catalog.py",
@@ -61,7 +61,6 @@
     "@types/node": "26.6.4",
     "@typescript-eslint/parser": "8.71.0",
     "eslint": "10.12.0",
-    "gulp": "5.0.1",
     "n8n-workflow": "2.33.0",
     "prettier": "3.9.9",
     "rimraf": "6.1.3",
