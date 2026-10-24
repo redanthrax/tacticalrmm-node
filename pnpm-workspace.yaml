@@ -22,3 +22,10 @@ engineStrict: true
 nodeVersion: 22.22.3
 
 managePackageManagerVersions: true
+
+# GHSA-mrhx-c7xc-m3w5 (zod <4.6.6): zod 3.x comes in only through the n8n-workflow dev/peer
+# dependency, so it never ships in this package, and n8n-workflow still requires zod 3.
+# Revisit by 2027-01-24, or sooner once n8n-workflow moves to zod >=4.6.6. Also ignored in osv-scanner.toml.
+auditConfig:
+  ignoreGhsas:
+    - GHSA-mrhx-c7xc-m3w5
