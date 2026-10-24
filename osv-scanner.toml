@@ -1,0 +1,6 @@
+# zod 3.x comes in only through the n8n-workflow dev/peer dependency, so it never ships in this
+# package, and n8n-workflow still requires zod 3. Also ignored in pnpm-workspace.yaml (auditConfig).
+[[IgnoredVulns]]
+id = "GHSA-mrhx-c7xc-m3w5"
+ignoreUntil = 2027-01-24
+reason = "zod 3.x is a dev-only transitive dependency of n8n-workflow; no patched 3.x release exists"
