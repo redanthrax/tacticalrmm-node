@@ -1,7 +1,7 @@
 # Publishes to npm with provenance (required for n8n community verification).
 #
 # One-time npm setup:
-# 1. https://www.npmjs.com/package/@redanthrax/n8n-nodes-tacticalrmm → Settings
+# 1. https://www.npmjs.com/package/n8n-nodes-tacticalrmm → Settings
 # 2. Publish access → Trusted Publishers → Add GitHub Actions publisher:
 #    - Owner: redanthrax
 #    - Repository: tacticalrmm-node
@@ -11,7 +11,11 @@
 # Do NOT add NPM_TOKEN to GitHub secrets for this workflow.
 # Do NOT set registry-url on setup-node (breaks OIDC — see npm/actions/setup-node#1551).
 #
-# Release: bump version in package.json, commit, push tag (e.g. 1.3.2), this workflow runs.
+# Release: bump version in package.json, commit to master, push a matching tag (e.g. 1.3.13).
+# The tag must equal the package.json version and point to a commit on master.
+#
+# Actions are pinned to full commit SHAs (Dependabot keeps them updated). This workflow
+# deliberately uses no dependency cache, so a poisoned cache can't reach the published package.
 
 name: Publish
 
@@ -19,34 +23,55 @@ on:
   push:
     tags:
       - '*.*.*'
-  release:
-    types: [published]
+  # Manual re-run: pick the release tag as the ref. Branch refs are rejected below.
   workflow_dispatch:
 
-permissions:
-  contents: read
-  id-token: write
+permissions: {}
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    name: Publish to npm
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-26.04
+    timeout-minutes: 20
     permissions:
-      contents: read
-      id-token: write
+      contents: read # check out the repository
+      id-token: write # OIDC token for npm trusted publishing and provenance
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Verify tag matches package.json and is on master
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if [ "$TAG" != "$version" ]; then
+            echo "::error::Tag $TAG does not match package.json version $version"
+            exit 1
+          fi
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/master; then
+            echo "::error::Tag $TAG ($GITHUB_SHA) is not on master"
+            exit 1
+          fi
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
         with:
           version: 11.14.0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: '24.x'
-          cache: pnpm
+          package-manager-cache: false
 
       - name: Upgrade npm (OIDC trusted publishing requires npm 11.5.1+)
         run: npm install -g npm@11.6.2
@@ -60,11 +85,13 @@ jobs:
       - name: pnpm audit (high severity and above)
         run: pnpm audit --audit-level=high
 
+      # Runs the osv-scanner image directly, pinned by digest (the osv-scanner action
+      # references its image by a mutable tag). Image: ghcr.io/google/osv-scanner:v2.7.0
       - name: OSV vulnerability scan (lockfile)
-        uses: google/osv-scanner-action/osv-scanner-action@v2.3.3
-        with:
-          scan-args: |-
-            --lockfile=pnpm-lock.yaml
+        run: >-
+          docker run --rm -v "$PWD":/src:ro -w /src
+          ghcr.io/google/osv-scanner@sha256:4f3b7e2c64b9d38a5febc5a7e4a3dfef1d1362f726dea7a2ef4762b46469fcd0
+          --lockfile=pnpm-lock.yaml
 
       - name: Build
         run: pnpm run build
