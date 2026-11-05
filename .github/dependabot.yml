@@ -6,6 +6,10 @@ updates:
       interval: weekly
       day: monday
     open-pull-requests-limit: 5
+    # Wait before proposing new releases so compromised versions are usually caught and
+    # pulled first (pnpm-workspace.yaml minimumReleaseAge enforces 1 day at install).
+    cooldown:
+      default-days: 7
     groups:
       dev-dependencies:
         patterns:
@@ -21,3 +25,21 @@ updates:
         versions: ['>=7.0.0']
     # All Dependabot PRs must pass the "Supply chain security" workflow before merge
     # (enable required status checks on master in GitHub branch protection).
+
+  # Keeps the SHA-pinned actions in .github/workflows up to date (bumps the SHA and the
+  # version comment together). The osv-scanner image digest is pinned in a run step and
+  # must be bumped by hand.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+    commit-message:
+      prefix: chore
+      include: scope
