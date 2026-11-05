@@ -4,3 +4,12 @@
 id = "GHSA-mrhx-c7xc-m3w5"
 ignoreUntil = 2027-01-24
 reason = "zod 3.x is a dev-only transitive dependency of n8n-workflow; no patched 3.x release exists"
+
+# minimatch 10.x comes in only through eslint, @eslint/config-array and @typescript-eslint
+# (lint tooling, never shipped in dist). The fix is only in 11.0.1 and their latest releases
+# still require ^10. Revisit by 2027-01-31, or sooner once eslint/typescript-eslint move to
+# minimatch >=11.0.1. Also ignored in pnpm-workspace.yaml (auditConfig).
+[[IgnoredVulns]]
+id = "GHSA-g3hv-75wg-m249"
+ignoreUntil = 2027-01-31
+reason = "minimatch 10.x is a dev-only transitive dependency of eslint/typescript-eslint; no patched 10.x release exists"
