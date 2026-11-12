@@ -7,6 +7,11 @@ overrides:
   lodash: '>=4.18.0'
   uuid: '11.1.1'
   n8n-workflow: '2.22.3'
+  # GHSA-g3hv-75wg-m249 (minimatch >=7.0.0 <11.0.1): no patched 10.x release exists.
+  # eslint, @eslint/config-array, and @typescript-eslint still request ^10, but they
+  # only use `new Minimatch()` and `.match()`, which 11 keeps. Exact pin so
+  # minimumReleaseAgeStrict cannot float onto a release younger than 24h.
+  minimatch: '11.0.6'
 
 allowBuilds:
   isolated-vm: true
@@ -23,13 +28,10 @@ nodeVersion: 22.22.3
 
 managePackageManagerVersions: true
 
-# GHSA-mrhx-c7xc-m3w5 (zod <4.6.6): zod 3.x comes in only through the n8n-workflow dev/peer
-# dependency, so it never ships in this package, and n8n-workflow still requires zod 3.
-# Revisit by 2027-01-24, or sooner once n8n-workflow moves to zod >=4.6.6. Also ignored in osv-scanner.toml.
-# GHSA-g3hv-75wg-m249 (minimatch <11.0.1): minimatch 10.x comes in only through eslint and
-# typescript-eslint lint tooling, whose latest releases still require ^10. Revisit by 2027-01-31,
-# or sooner once they move to minimatch >=11.0.1. Also ignored in osv-scanner.toml.
+# GHSA-mrhx-c7xc-m3w5 (zod <4.6.6, high): zod 3.x comes in only through the n8n-workflow
+# dev/peer dependency, so it never ships in this package. n8n-workflow still requires zod 3
+# (including 2.33.0 and stable 2.47.1), and no patched 3.x release exists. Revisit by
+# 2027-01-24, or sooner once n8n-workflow moves to zod >=4.6.6. Also ignored in osv-scanner.toml.
 auditConfig:
   ignoreGhsas:
     - GHSA-mrhx-c7xc-m3w5
-    - GHSA-g3hv-75wg-m249
